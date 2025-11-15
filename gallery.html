@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gallery — Q2 Rentals</title>
+    <meta name="description" content="Photos of our Audi Q2 for rent." />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="index.html">Q2 Rentals</a>
+        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="gallery" id="gallery">
+        <h1>Gallery</h1>
+        <p>Click images to view larger versions.</p>
+        <div class="gallery-grid">
+          <a href="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=1600&auto=format&fit=crop" class="glightbox" data-caption="Audi Q2 exterior">
+            <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=600&auto=format&fit=crop" alt="Audi Q2 exterior" loading="lazy" />
+          </a>
+          <a href="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?q=80&w=1600&auto=format&fit=crop" class="glightbox" data-caption="Interior detail">
+            <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?q=80&w=600&auto=format&fit=crop" alt="Interior detail" loading="lazy" />
+          </a>
+          <a href="https://images.unsplash.com/photo-1517940310602-1152b9f2c055?q=80&w=1600&auto=format&fit=crop" class="glightbox" data-caption="Rear seats">
+            <img src="https://images.unsplash.com/photo-1517940310602-1152b9f2c055?q=80&w=600&auto=format&fit=crop" alt="Rear seats" loading="lazy" />
+          </a>
+          <a href="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=1600&auto=format&fit=crop" class="glightbox" data-caption="Cargo space">
+            <img src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=600&auto=format&fit=crop" alt="Cargo space" loading="lazy" />
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year-gallery"></span> Q2 Rentals. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
