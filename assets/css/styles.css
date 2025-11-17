@@ -137,7 +137,7 @@ input:focus,textarea:focus{outline:2px solid rgba(187,10,48,.5);border-color:tra
 .lightbox-close{position:absolute;top:18px;right:18px;background:transparent;border:1px solid rgba(255,255,255,.6);color:#fff;border-radius:999px;width:36px;height:36px;display:grid;place-items:center;font-size:1.2rem}
 
 /* Full-bleed hero variant */
-.hero-full{min-height:80vh;display:flex;align-items:center;padding:4.5rem 1rem;background-size:cover;background-position:center;background-image:url('https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=1600&auto=format&fit=crop');position:relative}
+.hero-full{min-height:80vh;display:flex;align-items:center;padding:4.5rem 1rem;background-size:cover;background-position:center;background-image:url('https://source.unsplash.com/k7EFdLQTMts/1600x900');position:relative}
 .hero-full::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,rgba(0,0,0,.7) 15%,rgba(0,0,0,.35) 55%,rgba(0,0,0,.8))}
 .hero-full .hero-content{position:relative;max-width:640px}
 .hero-full .hero-content .btn-primary{margin-top:.5rem}
