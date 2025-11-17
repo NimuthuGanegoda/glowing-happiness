@@ -118,3 +118,130 @@ if (bookingForm) {
     }
   });
 }
+
+/* --- New enhancements: currency conversion, reveal/parallax, booking service handling, scroll progress --- */
+
+// Scroll progress bar
+const progress = document.getElementById('scroll-progress');
+function updateProgress(){
+  if (!progress) return;
+  const h = document.documentElement;
+  const scrollTop = h.scrollTop || document.body.scrollTop;
+  const docHeight = h.scrollHeight - h.clientHeight;
+  const pct = docHeight > 0 ? Math.round((scrollTop / docHeight) * 100) : 0;
+  progress.style.width = pct + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+updateProgress();
+
+// Reveal on scroll
+const revealEls = document.querySelectorAll('[data-reveal]');
+if ('IntersectionObserver' in window && revealEls.length){
+  const rObs = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('reveal','revealed');
+        rObs.unobserve(en.target);
+      }
+    });
+  }, {threshold:0.12});
+  revealEls.forEach(el => rObs.observe(el));
+}
+
+// Simple parallax for hero
+const hero = document.querySelector('.hero-full');
+function heroParallax(){
+  if (!hero) return;
+  const y = window.scrollY;
+  hero.style.transform = `translateY(${Math.min(0, y * -0.06)}px)`;
+}
+window.addEventListener('scroll', heroParallax, {passive:true});
+
+// Currency conversion (base prices stored in data-base as USD)
+const currencySelect = document.getElementById('currency-select');
+const moneyEls = document.querySelectorAll('.money');
+const currencySymbolEls = document.querySelectorAll('.currency-symbol');
+const currencySymbols = {USD:'$',LKR:'Rs',EUR:'€',GBP:'£',JPY:'¥',KRW:'₩'};
+let rates = {USD:1};
+
+async function fetchRates(){
+  try{
+    const resp = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=USD,LKR,EUR,GBP,JPY,KRW');
+    if (!resp.ok) throw new Error('rate error');
+    const data = await resp.json();
+    rates = data.rates || rates;
+  }catch(err){
+    console.warn('Currency rates unavailable, using USD base', err);
+    rates = {USD:1,LKR:1,rates:1};
+  }
+  renderPrices();
+}
+
+function renderPrices(){
+  const cur = (currencySelect && currencySelect.value) || 'USD';
+  moneyEls.forEach(el => {
+    const base = parseFloat(el.dataset.base || '0');
+    const rate = rates[cur] || 1;
+    const val = base * rate;
+    try{
+      el.textContent = new Intl.NumberFormat(undefined, {style:'currency',currency:cur,maximumFractionDigits:0}).format(val).replace(/[0-9\.,\s]/g,'') ? new Intl.NumberFormat(undefined, {style:'currency',currency:cur,maximumFractionDigits:0}).format(val) : val;
+      // Fallback: simply show numeric
+    }catch(e){
+      el.textContent = val.toFixed(0);
+    }
+  });
+  // Update symbol elements (simple visual)
+  currencySymbolEls.forEach(s => {
+    const curSym = currencySymbols[currencySelect.value] || currencySymbols.USD;
+    s.textContent = curSym;
+  });
+}
+
+if (currencySelect){
+  currencySelect.addEventListener('change', renderPrices);
+  fetchRates();
+}
+
+// Booking service handling (show airport fields, seat/licence notes)
+const serviceSelect = document.getElementById('service');
+const airportFields = document.getElementById('airport-fields');
+const formNote = document.querySelector('.form-note');
+function updateServiceNote(){
+  if (!serviceSelect) return;
+  const v = serviceSelect.value;
+  if (v === 'airport-transfer'){
+    airportFields && airportFields.classList.remove('hidden-inline');
+    airportFields && airportFields.removeAttribute('aria-hidden');
+    formNote.textContent = 'Airport transfer selected — please provide flight number and airline.';
+  } else {
+    airportFields && airportFields.classList.add('hidden-inline');
+    airportFields && airportFields.setAttribute('aria-hidden','true');
+    if (v === 'self-drive'){
+      formNote.textContent = 'Self-drive: valid driving licence required. International visitors should carry an International Driving Permit (IDP). Driver occupies one seat.';
+    } else if (v === 'driver' || v === 'driver-guide'){
+      formNote.textContent = 'Driver provided: seating is 4 adults + 1 child (driver occupies front seat). Guide can be the driver if requested.';
+    } else {
+      formNote.textContent = '';
+    }
+  }
+}
+if (serviceSelect){
+  serviceSelect.addEventListener('change', updateServiceNote);
+  updateServiceNote();
+}
+
+// Additional booking validation for airport transfer
+if (bookingForm){
+  bookingForm.addEventListener('submit', e => {
+    const svc = bookingForm.querySelector('#service');
+    if (svc && svc.value === 'airport-transfer'){
+      const flight = bookingForm.querySelector('#flight-number');
+      const airline = bookingForm.querySelector('#airline');
+      if (!flight || !flight.value || !airline || !airline.value){
+        e.preventDefault();
+        (formNote).textContent = 'Please provide flight number and airline for airport transfers.';
+        (flight || airline).focus();
+      }
+    }
+  });
+}
