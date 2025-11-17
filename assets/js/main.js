@@ -187,11 +187,11 @@ function renderPrices(){
     const base = parseFloat(el.dataset.base || '0');
     const rate = rates[cur] || 1;
     const val = base * rate;
+    // Show number only; the symbol is shown separately in .currency-symbol
     try{
-      el.textContent = new Intl.NumberFormat(undefined, {style:'currency',currency:cur,maximumFractionDigits:0}).format(val).replace(/[0-9\.,\s]/g,'') ? new Intl.NumberFormat(undefined, {style:'currency',currency:cur,maximumFractionDigits:0}).format(val) : val;
-      // Fallback: simply show numeric
+      el.textContent = new Intl.NumberFormat(undefined, {style:'decimal',maximumFractionDigits:0}).format(val);
     }catch(e){
-      el.textContent = val.toFixed(0);
+      el.textContent = Math.round(val).toString();
     }
   });
   // Update symbol elements (simple visual)
