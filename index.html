@@ -4,55 +4,43 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Audi Q2 Rental</title>
-    <meta name="description" content="Rent our Audi Q2 in Sri Lanka with Audi Virtual Cockpit — clean, comfortable compact SUV. Seats 4 adults + 1 child. Flexible pricing. Book your dates now." />
+    <meta name="description" content="Rent our Audi Q2 — flexible pricing, clean and comfortable compact SUV. Book your dates now." />
     <meta property="og:title" content="Audi Q2 Rental" />
-    <meta property="og:description" content="Rent our Audi Q2 in Sri Lanka — flexible pricing, clean and comfortable compact SUV." />
+    <meta property="og:description" content="Rent our Audi Q2 — flexible pricing, clean and comfortable compact SUV." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://images.unsplash.com/photo-1744287690146-86165c87b2e3?q=80&w=1200&auto=format&fit=crop" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=1200&auto=format&fit=crop" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="site-header">
       <nav class="nav">
         <a class="brand" href="#">Q2 Rentals</a>
         <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+        <button class="theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">🌗</button>
         <ul class="nav-links">
           <li><a href="#car">Car</a></li>
-          <li><a href="#tours">Tours</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#map">Map</a></li>
           <li><a href="#book">Book</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
-        <label class="currency-picker" style="margin-left:.6rem;display:inline-flex;gap:.35rem;align-items:center">
-          <span style="color:var(--muted);font-size:.9rem">Currency</span>
-          <select id="currency-select" aria-label="Select currency" style="background:#0e1218;border:1px solid rgba(255,255,255,.15);color:var(--text);border-radius:8px;padding:.35rem .5rem">
-            <option value="USD" selected>USD $</option>
-            <option value="EUR">EUR €</option>
-            <option value="GBP">GBP £</option>
-            <option value="LKR">LKR ₨</option>
-          </select>
-        </label>
       </nav>
     </header>
 
-    <main>
-      <section class="hero" id="home">
-        <div class="hero-content" data-reveal>
+    <main id="main-content">
+      <section class="hero-full" id="home">
+        <div class="hero-content">
           <h1>Rent our Audi Q2</h1>
-          <p>Compact SUV • Automatic • Virtual cockpit • Fuel efficient</p>
+          <p>Premium compact SUV • Automatic • Efficiency • Comfort • Safety</p>
           <a class="btn btn-primary" href="#book">Book Now</a>
-        </div>
-        <div class="image-mask" style="--mask-w: 220px; --mask-h: 70px; --mask-bottom: 6%; --mask-blur: 12px;">
-          <img class="hero-image" data-reveal src="https://images.unsplash.com/photo-1744287690146-86165c87b2e3?q=80&w=1400&auto=format&fit=crop" alt="2018 Audi Q2 — white exterior" loading="eager" />
         </div>
       </section>
 
-      <section class="specs container" id="car" data-reveal>
+      <section class="specs container" id="car">
         <h2>Audi Q2 — Highlights</h2>
         <div class="spec-grid">
           <div class="spec">
@@ -61,8 +49,7 @@
           </div>
           <div class="spec">
             <h3>Seats</h3>
-            <p>4 Adults + 1 Child</p>
-            <p class="fineprint">With Driver/Driver‑guide: up to 4 passenger seats.</p>
+            <p>5 Adults</p>
           </div>
           <div class="spec">
             <h3>Luggage</h3>
@@ -76,52 +63,30 @@
             <h3>Safety</h3>
             <p>Airbags • ABS • ISOFIX</p>
           </div>
+          <div class="spec">
+            <h3>Extras</h3>
+            <p>Child seat, GPS on request</p>
+          </div>
         </div>
       </section>
 
-      <section class="container" id="features" data-reveal>
-        <h2>Features — Audi Q2 2018 1.4 TFSI</h2>
-        <div class="spec-grid">
-          <div class="spec"><h3>Engine</h3><p>1.4 TFSI turbo petrol, ~150 PS (market dependent)</p></div>
-          <div class="spec"><h3>Gearbox</h3><p>Automatic (S tronic) • Smooth city driving</p></div>
-          <div class="spec"><h3>Tech</h3><p>Audi Virtual Cockpit • MMI • Bluetooth • USB</p></div>
-          <div class="spec"><h3>Connectivity</h3><p>Apple CarPlay / Android Auto (where equipped)</p></div>
-          <div class="spec"><h3>Comfort</h3><p>Automatic A/C • Height-adjustable seats • ISOFIX</p></div>
-          <div class="spec"><h3>Assists</h3><p>Parking sensors • Cruise control (where equipped)</p></div>
-        </div>
-        <p class="fineprint">Note: Equipment may vary by market/trim. Confirm exact spec when booking.</p>
-      </section>
-
-      <section class="container" id="map" data-reveal>
-        <h2>Locations Map</h2>
-        <p class="fineprint">Explore pickup spots or tour highlights. Replace with your exact locations.</p>
-        <div class="map-embed">
-          <iframe
-            loading="lazy"
-            title="Locations map"
-            src="https://www.google.com/maps?q=Sri+Lanka&output=embed"
-            referrerpolicy="no-referrer-when-downgrade"
-            aria-label="Interactive map for locations"></iframe>
-        </div>
-      </section>
-
-      <section class="pricing" id="pricing" data-reveal>
+      <section class="pricing" id="pricing">
         <div class="container">
           <h2>Simple Pricing</h2>
           <div class="price-cards">
             <article class="card">
               <h3>Daily</h3>
-              <p class="price"><span class="currency-symbol">$</span><span class="price-amount" data-amount-usd="75">75</span><span class="unit">/day</span></p>
+              <p class="price"><span>$</span>75<span class="unit">/day</span></p>
               <ul>
                 <li>200 km/day included</li>
-                <li>Additional km: <span class="currency-symbol">$</span><span class="money" data-amount-usd="0.30">0.30</span>/km</li>
+                <li>Additional km: $0.30/km</li>
                 <li>Basic insurance included</li>
               </ul>
               <a href="#book" class="btn btn-secondary">Choose Daily</a>
             </article>
             <article class="card">
               <h3>Weekend</h3>
-              <p class="price"><span class="currency-symbol">$</span><span class="price-amount" data-amount-usd="200">200</span><span class="unit">/Fri–Sun</span></p>
+              <p class="price"><span>$</span>200<span class="unit">/Fri–Sun</span></p>
               <ul>
                 <li>600 km included</li>
                 <li>Flexible pickup times</li>
@@ -131,7 +96,7 @@
             </article>
             <article class="card">
               <h3>Weekly</h3>
-              <p class="price"><span class="currency-symbol">$</span><span class="price-amount" data-amount-usd="450">450</span><span class="unit">/week</span></p>
+              <p class="price"><span>$</span>450<span class="unit">/week</span></p>
               <ul>
                 <li>Unlimited km</li>
                 <li>Best value</li>
@@ -140,51 +105,15 @@
               <a href="#book" class="btn btn-secondary">Choose Weekly</a>
             </article>
           </div>
-          <p class="fineprint">Security deposit and ID required. Fuel and tolls not included. Prices shown in selected currency are estimates.</p>
+          <p class="fineprint">Security deposit and ID required. Fuel and tolls not included. Prices are placeholders — update to your rates.</p>
         </div>
       </section>
 
-      <section class="container" id="tours" data-reveal>
-        <h2>Travel & Tours — Within Sri Lanka</h2>
-        <div class="price-cards">
-          <article class="card">
-            <h3>With Driver</h3>
-            <p>Professional driver for city or day trips. Safer and stress-free.</p>
-            <ul>
-              <li>Local expertise • Smooth routes</li>
-              <li>Assistance with parking & tolls</li>
-              <li>Fuel at actuals</li>
-            </ul>
-            <p class="fineprint">Driver day rate from <span class="currency-symbol">$</span><span class="money" data-amount-usd="35">35</span>/day. Passenger seats: up to 4. Service area: Sri Lanka.</p>
-          </article>
-          <article class="card">
-            <h3>Driver‑guide</h3>
-            <p>One professional serves as both driver and English‑speaking guide.</p>
-            <ul>
-              <li>Curated sightseeing, history, photo stops</li>
-              <li>Custom itineraries at your pace</li>
-              <li>Fuel at actuals</li>
-            </ul>
-            <p class="fineprint">Driver‑guide add‑on from <span class="currency-symbol">$</span><span class="money" data-amount-usd="25">25</span>/day. Passenger seats: up to 4. Service area: Sri Lanka.</p>
-          </article>
-          <article class="card">
-            <h3>Airport Transfers</h3>
-            <p>Pickup or drop‑off at the airport with our driver. Timely and comfortable.</p>
-            <ul>
-              <li>Flight tracking and flexible waiting</li>
-              <li>Meet & greet at arrivals on request</li>
-              <li>Luggage assistance</li>
-            </ul>
-            <p class="fineprint">From <span class="currency-symbol">$</span><span class="money" data-amount-usd="30">30</span>/trip (Colombo area). Island‑wide on request. Passenger seats: up to 4.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="gallery container" id="gallery" data-reveal>
+      <section class="gallery container" id="gallery">
         <h2>Gallery</h2>
         <div class="gallery-grid">
-          <a href="https://images.unsplash.com/photo-1744287690146-86165c87b2e3?q=80&w=1600&auto=format&fit=crop" class="glightbox" data-caption="2018 Audi Q2 — white exterior">
-            <img src="https://images.unsplash.com/photo-1744287690146-86165c87b2e3?q=80&w=600&auto=format&fit=crop" alt="2018 Audi Q2 — white exterior" loading="lazy" />
+          <a href="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=1600&auto=format&fit=crop" class="glightbox" data-caption="Audi Q2 exterior">
+            <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=600&auto=format&fit=crop" alt="Audi Q2 exterior" loading="lazy" />
           </a>
           <a href="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?q=80&w=1600&auto=format&fit=crop" class="glightbox" data-caption="Interior detail">
             <img src="https://images.unsplash.com/photo-1542281286-9e0a16bb7366?q=80&w=600&auto=format&fit=crop" alt="Interior detail" loading="lazy" />
@@ -198,47 +127,14 @@
         </div>
       </section>
 
-      <section class="booking" id="book" data-reveal>
+      <section class="booking" id="book">
         <div class="container">
           <h2>Book Your Dates</h2>
           <form class="booking-form" action="https://formsubmit.co/YOUREMAIL@example.com" method="POST">
             <input type="hidden" name="_subject" value="New Audi Q2 Booking" />
             <input type="hidden" name="_captcha" value="false" />
+            <p class="form-note" aria-live="polite"></p>
             <div class="form-grid">
-              <div class="field field-full">
-                <label for="service">Service</label>
-                <select id="service" name="service">
-                  <option value="self-drive">Self-drive</option>
-                  <option value="with-driver">With Driver</option>
-                  <option value="driver-guide">Driver‑guide</option>
-                  <option value="airport-transfer">Airport Transfer</option>
-                </select>
-                <p class="fineprint" id="seat-note">Self-drive: seats for 4 adults + 1 child. With Driver/Driver‑guide: passenger seats up to 4.</p>
-                <p class="fineprint" id="license-note">International travelers: For self‑drive in Sri Lanka, you must carry an International Driving Permit (IDP) plus your valid home‑country license and passport. If you don’t have an IDP, choose With Driver or Driver‑guide.</p>
-              </div>
-              <div class="field">
-                <label for="flight-number">Flight Number</label>
-                <input id="flight-number" name="flight_number" type="text" placeholder="e.g., UL 504" />
-              </div>
-              <div class="field">
-                <label for="airline">Airline</label>
-                <input id="airline" name="airline" type="text" placeholder="e.g., SriLankan Airlines" />
-              </div>
-              <div class="field">
-                <label for="transfer-type">Transfer Type</label>
-                <select id="transfer-type" name="transfer_type">
-                  <option value="pickup">Airport Pickup</option>
-                  <option value="dropoff">Airport Drop‑off</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="airport">Airport</label>
-                <select id="airport" name="airport">
-                  <option value="CMB">CMB — Bandaranaike Intl. (Katunayake)</option>
-                  <option value="RML">RML — Ratmalana Airport</option>
-                  <option value="HRI">HRI — Mattala Rajapaksa Intl.</option>
-                </select>
-              </div>
               <div class="field">
                 <label for="name">Full Name</label>
                 <input id="name" name="name" type="text" placeholder="Jane Doe" required />
@@ -271,7 +167,14 @@
                 <label for="drop-location">Return Location</label>
                 <input id="drop-location" name="return_location" type="text" placeholder="City / Address" />
               </div>
-              
+              <fieldset class="field field-full extras-group">
+                <legend>Extras</legend>
+                <div class="options">
+                  <label><input type="checkbox" name="extras_child_seat" value="yes" /> Child seat</label>
+                  <label><input type="checkbox" name="extras_gps" value="yes" /> GPS</label>
+                  <label><input type="checkbox" name="extras_additional_driver" value="yes" /> Additional driver</label>
+                </div>
+              </fieldset>
               <div class="field field-full">
                 <label for="message">Notes</label>
                 <textarea id="message" name="message" rows="4" placeholder="Anything we should know?"></textarea>
@@ -283,9 +186,8 @@
         </div>
       </section>
 
-      <section class="contact container" id="contact" data-reveal>
+      <section class="contact container" id="contact">
         <h2>Contact</h2>
-        <p class="fineprint">Service area: Sri Lanka (island‑wide, subject to availability).</p>
         <div class="contact-cards">
           <a class="contact-card" href="tel:+15551234567">
             <span class="icon">📞</span>
@@ -300,28 +202,6 @@
             <span>rentals@example.com</span>
           </a>
         </div>
-
-        <h3 style="margin-top:1.2rem">Send us an email</h3>
-        <form class="contact-form" action="https://formsubmit.co/YOUREMAIL@example.com" method="POST">
-          <input type="hidden" name="_subject" value="Website Contact Message" />
-          <input type="hidden" name="_captcha" value="false" />
-          <div class="form-grid" style="grid-template-columns:repeat(2,1fr)">
-            <div class="field">
-              <label for="c-name">Name</label>
-              <input id="c-name" name="name" type="text" placeholder="Your name" required />
-            </div>
-            <div class="field">
-              <label for="c-email">Email</label>
-              <input id="c-email" name="email" type="email" placeholder="you@example.com" required />
-            </div>
-            <div class="field field-full">
-              <label for="c-message">Message</label>
-              <textarea id="c-message" name="message" rows="4" placeholder="How can we help?" required></textarea>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Send Email</button>
-          <p class="fineprint">Tip: Replace YOUREMAIL@example.com in the form action with your real email to receive messages.</p>
-        </form>
       </section>
     </main>
 
@@ -332,11 +212,17 @@
       </div>
     </footer>
 
-    <div id="lightbox" class="lightbox hidden" aria-label="Image preview">
+    <div class="contact-fab" aria-label="Quick contact">
+      <a href="tel:+15551234567" aria-label="Call us">📞</a>
+      <a href="https://wa.me/15551234567" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
+      <a href="mailto:rentals@example.com" aria-label="Email us">✉️</a>
+    </div>
+
+    <dialog id="lightbox" class="lightbox hidden" aria-label="Image preview">
       <button class="lightbox-close" aria-label="Close">×</button>
       <img alt="Preview" />
       <p class="lightbox-caption"></p>
-    </div>
+    </dialog>
 
     <script src="assets/js/main.js"></script>
   </body>

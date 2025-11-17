@@ -1,10 +1,18 @@
-// Mobile nav toggle
+// Mobile nav toggle & close on link click
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
   });
 }
 
@@ -13,148 +21,100 @@ const yearEls = document.querySelectorAll('[id^="year"]');
 const yearStr = String(new Date().getFullYear());
 yearEls.forEach(el => { el.textContent = yearStr; });
 
-// Simple lightbox
+// Theme toggle
+const themeBtn = document.querySelector('.theme-toggle');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    const root = document.documentElement;
+    const current = root.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    if (next === 'dark') {
+      root.removeAttribute('data-theme');
+    } else {
+      root.setAttribute('data-theme', next);
+    }
+  });
+}
+
+// Active nav link highlighting by section intersection (only if internal hash links exist)
+const sectionIds = ['car','pricing','gallery','book','contact'];
+const observerOptions = {root:null,rootMargin:'0px 0px -60% 0px',threshold:0};
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const id = entry.target.id;
+    if (!id) return;
+    const link = navLinks && navLinks.querySelector(`a[href="#${id}"]`);
+    if (link) {
+      if (entry.isIntersecting) {
+        navLinks.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    }
+  });
+}, observerOptions);
+sectionIds.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+
+// Lightbox (dialog) with ESC + basic focus management
 const lightbox = document.getElementById('lightbox');
 const lbImg = lightbox && lightbox.querySelector('img');
 const lbCap = lightbox && lightbox.querySelector('.lightbox-caption');
 const lbClose = lightbox && lightbox.querySelector('.lightbox-close');
+let previousFocus = null;
+
+function openLightbox(href, cap){
+  if (!lightbox || !lbImg || !lbCap) return;
+  lbImg.src = href;
+  lbCap.textContent = cap;
+  previousFocus = document.activeElement;
+  lightbox.showModal();
+  lightbox.classList.remove('hidden');
+  lbClose.focus();
+}
+function closeLightbox(){
+  if (!lightbox) return;
+  lightbox.classList.add('hidden');
+  if (typeof lightbox.close === 'function') lightbox.close();
+  if (previousFocus) previousFocus.focus();
+}
 
 document.querySelectorAll('.glightbox').forEach(link => {
-  link.addEventListener('click', (e) => {
+  link.addEventListener('click', e => {
     e.preventDefault();
-    const href = link.getAttribute('href');
+    const href = link.href || link.getAttribute('href');
     const cap = link.getAttribute('data-caption') || '';
-    if (lightbox && lbImg && lbCap && href) {
-      lbImg.src = href;
-      lbCap.textContent = cap;
-      lightbox.classList.remove('hidden');
-    }
+    openLightbox(href, cap);
   });
 });
-
 if (lbClose && lightbox) {
-  lbClose.addEventListener('click', () => lightbox.classList.add('hidden'));
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) lightbox.classList.add('hidden');
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
   });
 }
 
-// Modern scroll effects
-(() => {
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Header scrolled state
-  const header = document.querySelector('.site-header');
-  // Scroll progress bar element
-  let progress = document.getElementById('scroll-progress');
-  if (!progress) {
-    progress = document.createElement('div');
-    progress.id = 'scroll-progress';
-    document.body.appendChild(progress);
-  }
-
-  // Reveal-on-scroll using IntersectionObserver
-  const toReveal = document.querySelectorAll('[data-reveal]');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
-    toReveal.forEach(el => io.observe(el));
-  } else {
-    // Fallback: show all
-    toReveal.forEach(el => el.classList.add('reveal-visible'));
-  }
-
-  // Parallax on hero image
-  const heroImg = document.querySelector('.hero-image');
-
-  const onScroll = () => {
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop || document.body.scrollTop || 0;
-    const docHeight = doc.scrollHeight - doc.clientHeight;
-    const progressPct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    if (progress) progress.style.width = progressPct + '%';
-
-    if (header) header.classList.toggle('scrolled', scrollTop > 10);
-
-    if (!prefersReduced && heroImg) {
-      const y = Math.min(60, scrollTop * 0.15);
-      heroImg.style.transform = `translateY(${y}px)`;
-    }
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-
-// Currency conversion for pricing
-(() => {
-  const select = document.getElementById('currency-select');
-  if (!select) return;
-
-  const symbolMap = { USD: '$', EUR: '€', GBP: '£', LKR: '₨' };
-  let rates = { USD: 1 };
-
-  const fmt = (val, code) => {
-    try {
-      return new Intl.NumberFormat(undefined, { style: 'currency', currency: code, maximumFractionDigits: 2 }).format(val).replace(/^([^\d]+)/, '');
-    } catch {
-      return String(Math.round(val * 100) / 100);
-    }
-  };
-
-  const applyCurrency = (code) => {
-    const factor = rates[code] || 1;
-    document.querySelectorAll('.currency-symbol').forEach(el => { el.textContent = symbolMap[code] || '$'; });
-    document.querySelectorAll('.price-amount, .money').forEach(el => {
-      const base = parseFloat(el.getAttribute('data-amount-usd') || '0');
-      const converted = base * factor;
-      el.textContent = fmt(converted, code);
-    });
-    try { localStorage.setItem('currency', code); } catch {}
-  };
-
-  const init = async () => {
-    const saved = (() => { try { return localStorage.getItem('currency'); } catch { return null; }})();
-    if (saved && symbolMap[saved]) (select).value = saved;
-    try {
-      const res = await fetch('https://api.exchangerate.host/latest?base=USD');
-      const data = await res.json();
-      if (data && data.rates) {
-        rates = { USD: 1, EUR: data.rates.EUR, GBP: data.rates.GBP, LKR: data.rates.LKR };
+// Booking form validation (return date after pickup)
+const bookingForm = document.querySelector('.booking-form');
+if (bookingForm) {
+  bookingForm.addEventListener('submit', e => {
+    const pickup = bookingForm.querySelector('#pickup-date');
+    const drop = bookingForm.querySelector('#drop-date');
+    const note = bookingForm.querySelector('.form-note');
+    if (pickup && drop && note) {
+      const pVal = pickup.value;
+      const dVal = drop.value;
+      if (pVal && dVal && dVal < pVal) {
+        e.preventDefault();
+        note.textContent = 'Return date must be after pickup date.';
+        drop.focus();
+      } else {
+        note.textContent = '';
       }
-    } catch { /* offline or blocked: keep USD=1 */ }
-    applyCurrency((select).value);
-  };
-
-  select.addEventListener('change', () => applyCurrency((select).value));
-  init();
-})();
-
-// Booking seat note updater
-(() => {
-  const select = document.getElementById('service');
-  const note = document.getElementById('seat-note');
-  const license = document.getElementById('license-note');
-  if (!select || !note) return;
-  const update = () => {
-    const val = select.value;
-    if (val === 'self-drive') {
-      note.textContent = 'Self-drive: seats for 4 adults + 1 child. With Driver/Driver‑guide: passenger seats up to 4.';
-      if (license) license.textContent = 'International travelers: For self‑drive in Sri Lanka, you must carry an International Driving Permit (IDP) plus your valid home‑country license and passport.';
-    } else if (val === 'airport-transfer' || val === 'with-driver' || val === 'driver-guide') {
-      note.textContent = 'Passenger seats available: up to 4 (one seat is occupied by the Driver/Driver‑guide).';
-      if (license) license.textContent = 'No IDP required when booking With Driver, Driver‑guide or Airport Transfer.';
-    } else {
-      note.textContent = 'Passenger seats: up to 4.';
-      if (license) license.textContent = '';
     }
-  };
-  select.addEventListener('change', update);
-  update();
-})();
+  });
+}
