@@ -25,13 +25,23 @@ yearEls.forEach(el => { el.textContent = yearStr; });
 const themeBtn = document.querySelector('.theme-toggle');
 if (themeBtn) {
   themeBtn.addEventListener('click', () => {
+    // Toggle between dark (default), light, and apple modes in a cycle
+    const body = document.body;
     const root = document.documentElement;
-    const current = root.getAttribute('data-theme');
-    const next = current === 'light' ? 'dark' : 'light';
-    if (next === 'dark') {
+    const apple = body.classList.contains('apple');
+    const light = root.getAttribute('data-theme') === 'light';
+    if (!light && !apple){
+      // move to light
+      root.setAttribute('data-theme','light');
+      body.classList.remove('apple');
+    } else if (light && !apple){
+      // move to apple
       root.removeAttribute('data-theme');
+      body.classList.add('apple');
     } else {
-      root.setAttribute('data-theme', next);
+      // back to dark
+      body.classList.remove('apple');
+      root.removeAttribute('data-theme');
     }
   });
 }
@@ -61,46 +71,7 @@ sectionIds.forEach(id => {
   if (el) observer.observe(el);
 });
 
-// Lightbox (dialog) with ESC + basic focus management
-const lightbox = document.getElementById('lightbox');
-const lbImg = lightbox && lightbox.querySelector('img');
-const lbCap = lightbox && lightbox.querySelector('.lightbox-caption');
-const lbClose = lightbox && lightbox.querySelector('.lightbox-close');
-let previousFocus = null;
-
-function openLightbox(href, cap){
-  if (!lightbox || !lbImg || !lbCap) return;
-  lbImg.src = href;
-  lbCap.textContent = cap;
-  previousFocus = document.activeElement;
-  lightbox.showModal();
-  lightbox.classList.remove('hidden');
-  lbClose.focus();
-}
-function closeLightbox(){
-  if (!lightbox) return;
-  lightbox.classList.add('hidden');
-  if (typeof lightbox.close === 'function') lightbox.close();
-  if (previousFocus) previousFocus.focus();
-}
-
-document.querySelectorAll('.glightbox').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const href = link.href || link.getAttribute('href');
-    const cap = link.getAttribute('data-caption') || '';
-    openLightbox(href, cap);
-  });
-});
-if (lbClose && lightbox) {
-  lbClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) closeLightbox();
-  });
-  window.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
-  });
-}
+// Lightbox removed (gallery links now open images directly)
 
 // Booking form validation (return date after pickup)
 const bookingForm = document.querySelector('.booking-form');
@@ -252,3 +223,76 @@ if (bookingForm){
     }
   });
 }
+
+/* ---- Vehicles dynamic loader + booking selection integration ---- */
+const vehicleGrid = document.getElementById('vehicle-grid');
+const vehiclesNote = document.getElementById('vehicles-note');
+const vehicleSelect = document.getElementById('vehicle-select');
+const vehicleField = document.getElementById('vehicle-field');
+
+function attachVehicleBookHandlers(){
+  const links = document.querySelectorAll('[data-vehicle-id]');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      const id = link.getAttribute('data-vehicle-id');
+      if (vehicleSelect && id){
+        vehicleSelect.value = id;
+      }
+    });
+  });
+}
+
+async function loadVehicles(){
+  if (!vehicleGrid) return;
+  try{
+    const resp = await fetch('assets/data/vehicles.json');
+    if (!resp.ok) throw new Error('Network');
+    const data = await resp.json();
+    vehicleGrid.innerHTML = '';
+    const available = [];
+    data.forEach(v => {
+      const art = document.createElement('article');
+      art.className = 'vehicle-card';
+      art.setAttribute('aria-label', v.name);
+      if (v.status === 'coming-soon') art.classList.add('coming-soon');
+      art.innerHTML = `
+        <div class="vehicle-media">
+          <img src="${v.thumbImage}" alt="${v.name}" loading="lazy" />
+        </div>
+        <div class="vehicle-info">
+          <h3>${v.name}</h3>
+          <p class="segment">${v.segment || ''}</p>
+          <ul class="mini-features">${(v.keyFeatures||[]).slice(0,4).map(f=>`<li>${f}</li>`).join('')}</ul>
+          ${v.status === 'available' ? `<a class="btn btn-secondary" href="#book" data-vehicle-id="${v.id}" data-vehicle-name="${v.name}">Book Now</a>` : '<span class="fineprint">Coming Soon</span>'}
+        </div>`;
+      vehicleGrid.appendChild(art);
+      if (v.status === 'available') available.push(v);
+    });
+    if (vehiclesNote) vehiclesNote.textContent = '';
+
+    if (vehicleSelect){
+      vehicleSelect.innerHTML = '';
+      available.forEach(v => {
+        const opt = document.createElement('option');
+        opt.value = v.id;
+        opt.textContent = v.name;
+        vehicleSelect.appendChild(opt);
+      });
+      if (available.length === 1 && vehicleField){
+        vehicleField.classList.add('hidden-inline');
+        vehicleSelect.value = available[0].id;
+      } else if (available.length > 1 && vehicleField){
+        vehicleField.classList.remove('hidden-inline');
+      }
+    }
+    attachVehicleBookHandlers();
+  }catch(err){
+    console.warn('Vehicle load failed', err);
+    if (vehiclesNote) vehiclesNote.textContent = 'Showing fallback vehicle. More coming soon.';
+    if (vehicleSelect && vehicleField){
+      vehicleField.classList.add('hidden-inline');
+    }
+    attachVehicleBookHandlers();
+  }
+}
+loadVehicles();

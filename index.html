@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body>
+  <body class="apple">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <div id="scroll-progress" aria-hidden="true"></div>
     <header class="site-header">
@@ -32,7 +32,7 @@
           <option value="KRW">KRW</option>
         </select>
         <ul class="nav-links">
-          <li><a href="#car">Car</a></li>
+          <li><a href="#vehicles">Vehicles</a></li>
           <li><a href="#features">Features</a></li>
           <li><a href="#full-specs">Full Specs</a></li>
           <li><a href="#tours">Tours</a></li>
@@ -48,8 +48,8 @@
     <main id="main-content">
       <section class="hero-full" id="home">
         <div class="hero-content">
-          <h1>Rent our Audi Q2 2018</h1>
-          <p>1.4 TFSI • 7‑speed S tronic • Premium compact SUV</p>
+          <h1>More Vehicles Coming Soon</h1>
+          <p>Audi Q2 2018 available now • Additional models arriving shortly</p>
           <ul class="feature-badges" aria-label="Key features">
             <li>150 PS Turbo</li>
             <li>Virtual Cockpit</li>
@@ -88,6 +88,29 @@
             <h3>Virtual Cockpit</h3>
             <p>Digital driver display with nav and configurable views</p>
           </div>
+        </div>
+      </section>
+
+      <section class="vehicles container" id="vehicles" data-reveal>
+        <h2>Our Vehicles</h2>
+        <p class="fineprint" id="vehicles-note">Loading vehicles…</p>
+        <div class="vehicle-grid" id="vehicle-grid">
+          <!-- Fallback static card -->
+          <article class="vehicle-card fallback" aria-label="Audi Q2 2018 1.4 TFSI">
+            <div class="vehicle-media">
+              <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=600&auto=format&fit=crop" alt="Audi Q2 2018 1.4 TFSI" loading="lazy" />
+            </div>
+            <div class="vehicle-info">
+              <h3>Audi Q2 2018 1.4 TFSI</h3>
+              <p class="segment">Compact SUV</p>
+              <ul class="mini-features">
+                <li>150 PS Turbo</li>
+                <li>Virtual Cockpit</li>
+                <li>LED Headlights</li>
+              </ul>
+              <a href="#book" class="btn btn-secondary" data-vehicle-id="audi-q2-2018-14-tfsi" data-vehicle-name="Audi Q2 2018 1.4 TFSI">Book Audi Q2</a>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -373,6 +396,12 @@
                 <label for="drop-location">Return Location</label>
                 <input id="drop-location" name="return_location" type="text" placeholder="City / Address" />
               </div>
+              <div class="field" id="vehicle-field">
+                <label for="vehicle-select">Vehicle</label>
+                <select id="vehicle-select" name="vehicle" aria-label="Select vehicle">
+                  <option value="audi-q2-2018-14-tfsi" selected>Audi Q2 2018 1.4 TFSI</option>
+                </select>
+              </div>
               <div class="field field-full">
                 <label for="service">Service Type</label>
                 <select id="service" name="service">
@@ -461,17 +490,7 @@
       </div>
     </footer>
 
-    <div class="contact-fab" aria-label="Quick contact">
-      <a href="tel:+15551234567" aria-label="Call us">📞</a>
-      <a href="https://wa.me/15551234567" target="_blank" rel="noopener" aria-label="WhatsApp chat">💬</a>
-      <a href="mailto:rentals@example.com" aria-label="Email us">✉️</a>
-    </div>
-
-    <dialog id="lightbox" class="lightbox hidden" aria-label="Image preview">
-      <button class="lightbox-close" aria-label="Close">×</button>
-      <img alt="Preview" />
-      <p class="lightbox-caption"></p>
-    </dialog>
+    <!-- Removed floating contact buttons and lightbox dialog -->
 
     <script src="assets/js/main.js"></script>
   </body>
