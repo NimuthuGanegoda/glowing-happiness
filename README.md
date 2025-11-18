@@ -1,13 +1,17 @@
-# Audi Q2 Rental Website
+# Ceylon Drive Hub Website
 
-Simple, responsive single‑page website to showcase and take booking requests for an Audi Q2 rental. Built with plain HTML/CSS/JS, easy to customize and deploy (e.g., GitHub Pages).
+Responsive multi‑vehicle rental landing site (currently Audi Q2 sample) with booking‑first workflow, dynamic vehicle & testimonial loading, theming, and optional Google Sheets + email integration via Apps Script.
 
 ## Features
-- Clean, mobile‑first landing page
-- Car highlights/specs and simple pricing cards
-- Booking form (via FormSubmit – no backend required)
-- Gallery with a lightweight JS lightbox
-- Accessible navigation with mobile menu
+- Booking‑first hero flow (choose exact vehicle after confirmation)
+- Dynamic vehicles grid fed by `assets/data/vehicles.json`
+- Full specification accordion (Audi Q2 sample) and generalized features section
+- Pricing cards with live currency conversion (USD base → selectable currencies)
+- Testimonials (list + submission page) merging sample data with local preview storage
+- Accessible navigation, mobile menu, skip link, scroll progress, section reveal animations
+- Theme cycle: dark → light → Apple‑style variant
+- Google Sheets + Email integration (replace placeholder macro URL)
+- Clean, mobile‑first responsive design
 
 ## Quick Start
 Open `index.html` in your browser. That’s it.
@@ -21,20 +25,101 @@ python3 -m http.server 8080
 ```
 
 ## Customize
-- Branding: update the site name and links in `index.html` header.
-- Pricing: edit the cards in the `#pricing` section of `index.html`.
-- Specs/Content: update the `#car` section and hero copy.
-- Images: replace Unsplash URLs in the `#gallery` and hero with your own photos.
-- Colors/Theme: adjust CSS variables in `assets/css/styles.css` under `:root`.
+- Branding: update `<title>`, `.brand` text, and meta descriptions.
+- Vehicles: add entries to `assets/data/vehicles.json` (status: `available` or `coming-soon`).
+- Pricing: edit amounts (data-base USD) in the `#pricing` section of `index.html`.
+- Specs: adjust/remove accordion sections inside `#full-specs` if adding other models.
+- Images: replace Unsplash placeholders (hero + gallery) with licensed media.
+- Colors/Theme: adjust CSS variables in `assets/css/styles.css` under `:root` and Apple variant block.
+- Testimonials: seed initial data in `assets/data/testimonials.json` or remove if not needed.
 
-## Booking Form (FormSubmit)
-The booking form posts to FormSubmit so you receive requests by email without a backend.
+## Booking / Contact / Testimonial Forms (Google Sheets + Email)
+Forms are configured to post to a Google Apps Script Web App (placeholder `https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec`). This lets you append submissions to a Google Sheet and send yourself an email notification — no external service required.
 
-1. In `index.html`, search for `formsubmit` and replace `YOUREMAIL@example.com` with your email.
-2. First submission may ask you to confirm the email with FormSubmit.
-3. You can add hidden fields (see formsubmit.co docs) for redirects or spam protection.
+### Setup Steps
+1. Create a new Google Sheet named `Ceylon Drive Hub`.
+2. Add three tabs: `Bookings`, `Contacts`, `Testimonials`.
+3. In Extensions → Apps Script, replace the default code with the script below.
+4. Fill in `SHEET_ID` (found in the Sheet URL) and `RECIPIENT_EMAIL`.
+5. Deploy: Deploy → New deployment → Web app:
+   - Execute as: Me
+   - Who has access: Anyone
+   - Copy the Web App URL (ends with `/exec`) and replace `YOUR_DEPLOYMENT_ID` in the HTML forms.
+6. Test a submission; verify a new row appears and email arrives.
 
-If you prefer WhatsApp: replace the form with a CTA link like `https://wa.me/<number>?text=...`.
+### Apps Script Code
+```javascript
+const SHEET_ID = 'YOUR_SHEET_ID_HERE';
+const RECIPIENT_EMAIL = 'you@example.com';
+
+function doPost(e) {
+  try {
+    const params = e.parameter;
+    const type = (params.type || '').toLowerCase();
+    const ss = SpreadsheetApp.openById(SHEET_ID);
+    const now = new Date();
+    let sheet;
+    if (type === 'booking') sheet = ss.getSheetByName('Bookings');
+    else if (type === 'contact') sheet = ss.getSheetByName('Contacts');
+    else if (type === 'testimonial') sheet = ss.getSheetByName('Testimonials');
+    else sheet = ss.getSheetByName('Contacts'); // fallback
+
+    // Ensure headers exist (runs once)
+    if (sheet.getLastRow() === 0){
+      const headers = type === 'booking' ? ['Timestamp','Name','Email','Phone','Pickup Date','Return Date','Pickup Location','Return Location','Service','Notes']
+        : type === 'contact' ? ['Timestamp','Name','Email','Message']
+        : type === 'testimonial' ? ['Timestamp','Name','Country','Rating','Message','Permission']
+        : ['Timestamp','Name','Email','Message'];
+      sheet.appendRow(headers);
+    }
+
+    if (type === 'booking') {
+      sheet.appendRow([
+        now, params.name, params.email, params.phone, params.pickup_date,
+        params.return_date, params.pickup_location, params.return_location,
+        params.service, params.message
+      ]);
+    } else if (type === 'contact') {
+      sheet.appendRow([now, params.name, params.email, params.message]);
+    } else if (type === 'testimonial') {
+      sheet.appendRow([now, params.name, params.country, params.rating, params.message, params.permission]);
+    } else {
+      sheet.appendRow([now, params.name, params.email, params.message]);
+    }
+
+    // Email notification summary
+    const subject = `New ${type || 'submission'} received`;
+    const body = Object.keys(params).map(k => `${k}: ${params[k]}`).join('\n');
+    MailApp.sendEmail(RECIPIENT_EMAIL, subject, body);
+
+    return ContentService.createTextOutput(JSON.stringify({status:'ok'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err){
+    return ContentService.createTextOutput(JSON.stringify({status:'error',message:err.message}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+```
+
+### Front-End Notes
+- Hidden `<input name="type" value="booking|contact|testimonial">` already added to each form.
+- If you want AJAX (stay on page), remove the `action` and handle with `fetch`. Current setup performs a normal POST redirect (Apps Script returns JSON; browser will show raw JSON). For better UX, implement JS interception.
+- Add a honeypot field (already in testimonial form: `_honey`) for spam mitigation if desired on other forms.
+
+### Optional: AJAX Submit Pattern
+```html
+<form id="booking-form" data-script-endpoint="https://script.google.com/macros/s/DEPLOYMENT/exec">...</form>
+```
+```javascript
+document.getElementById('booking-form').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const endpoint = e.target.dataset.scriptEndpoint;
+  const fd = new FormData(e.target);
+  const res = await fetch(endpoint, {method:'POST', body:fd});
+  const json = await res.json();
+  // Show success message
+});
+```
 
 ## Deploy (GitHub Pages)
 
@@ -61,18 +146,24 @@ Troubleshooting
 Alternatively host on Netlify, Vercel, Cloudflare Pages, or any static host.
 
 ## Notes
-- Demo photos use Unsplash and are for placeholder purposes. Replace with your Audi Q2 images.
-- No tracking or analytics included by default.
+- Demo photos use Unsplash placeholders; replace with your own media before production.
+- Specs are reference only; verify locally for accuracy.
+- No tracking/analytics included by default.
+- Currency conversion uses exchangerate.host (public API) — consider caching or server proxy for production reliability.
 
 ## Structure
 
 ```text
-index.html
+index.html                Main landing page (booking-first workflow)
+testimonials.html         Dedicated testimonials submission/list view
+about.html / contact.html Legacy pages (can be realigned or removed)
 assets/
-  css/styles.css
-  js/main.js
+  css/styles.css          Styles + theme variants
+  js/main.js              Interaction, dynamic loaders, currency, testimonials
+  data/vehicles.json      Vehicle listing (editable)
+  data/testimonials.json  Sample testimonials dataset
 ```
 
 ## License
 
-This website template is provided as‑is for your use. Replace imagery and content with your own.
+Provided as‑is for customization. Replace placeholder imagery and verify legal compliance for fonts, photos, and data.

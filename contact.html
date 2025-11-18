@@ -60,8 +60,8 @@
         <h2 id="quick-contact-heading">Quick Contact Form</h2>
         <p>Send us a quick message — we usually reply within a few hours.</p>
         <p class="form-note">Note: International visitors who plan to drive should confirm licence requirements (IDP may be required for self-drive).</p>
-        <form class="contact-form" action="https://formsubmit.co/YOUREMAIL@example.com" method="POST">
-          <input type="hidden" name="_subject" value="New Quick Contact Message" />
+        <form class="contact-form" action="https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec" method="POST">
+          <input type="hidden" name="type" value="contact" />
           <div class="field">
             <label for="qc-name">Name</label>
             <input id="qc-name" name="name" type="text" required placeholder="Your name" />
