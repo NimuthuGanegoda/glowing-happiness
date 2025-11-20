@@ -21,6 +21,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme') || 
+                    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <title>Ceylon Drive Hub — Premium Car Rentals</title>
         <meta name="description" content="Book first, choose vehicle later. Premium car rentals in Sri Lanka with flexible booking and transparent pricing." />
       </head>

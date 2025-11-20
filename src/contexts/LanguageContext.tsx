@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type Language = 'en' | 'ja' | 'de' | 'si';
+type Language = 'en' | 'ja' | 'de';
 
 interface LanguageContextType {
   language: Language;
@@ -100,14 +100,26 @@ const translations = {
     fullName: 'Full Name',
     email: 'Email',
     phone: 'Phone',
+    phoneWhatsapp: 'Phone/WhatsApp',
     serviceType: 'Service Type',
     selectService: 'Select a service',
     startDate: 'Start Date',
     endDate: 'End Date',
+    pickupDate: 'Pickup Date',
+    returnDate: 'Return Date',
     numberOfPeople: 'Number of People',
     specialRequests: 'Special Requests',
+    notes: 'Notes',
     submitBooking: 'Submit Booking',
+    requestBooking: 'Request Booking',
     estimatedPrice: 'Estimated Price',
+    pricingPlans: 'Pricing Plans',
+    confirmAvailability: "We'll confirm availability and final price by email/WhatsApp.",
+    anythingKnow: 'Anything we should know?',
+    namePlaceholder: 'Jane Doe',
+    emailPlaceholder: 'jane@example.com',
+    phonePlaceholder: '+1 555 123 4567',
+    bestValuePlan: 'Best value',
     
     // Contact Page
     contactHeroTitle: 'Get in Touch',
@@ -115,14 +127,19 @@ const translations = {
     contactInfo: 'Contact Information',
     phoneNumber: 'Phone',
     whatsapp: 'WhatsApp',
+    whatsappChat: 'WhatsApp Chat',
     emailAddress: 'Email',
     sendUsMessage: 'Send us a Message',
     yourName: 'Your Name',
+    name: 'Name',
     yourEmail: 'Your Email',
     subject: 'Subject',
     message: 'Message',
     sendMessage: 'Send Message',
     findUs: 'Find Us',
+    howCanHelp: 'How can we help?',
+    yourNamePlaceholder: 'Your name',
+    emailPlaceholder2: 'you@example.com',
   },
   
   ja: {
@@ -214,14 +231,26 @@ const translations = {
     fullName: 'フルネーム',
     email: 'メール',
     phone: '電話',
+    phoneWhatsapp: '電話/WhatsApp',
     serviceType: 'サービスタイプ',
     selectService: 'サービスを選択',
     startDate: '開始日',
     endDate: '終了日',
+    pickupDate: 'ピックアップ日',
+    returnDate: '返却日',
     numberOfPeople: '人数',
     specialRequests: '特別なリクエスト',
+    notes: 'メモ',
     submitBooking: '予約を送信',
+    requestBooking: '予約をリクエスト',
     estimatedPrice: '推定価格',
+    pricingPlans: '料金プラン',
+    confirmAvailability: 'メール/WhatsAppで利用可能性と最終価格を確認します。',
+    anythingKnow: '何か知っておくべきことはありますか？',
+    namePlaceholder: '山田 太郎',
+    emailPlaceholder: 'taro@example.com',
+    phonePlaceholder: '+81 90 1234 5678',
+    bestValuePlan: '最高の価値',
     
     // Contact Page
     contactHeroTitle: 'お問い合わせ',
@@ -229,14 +258,19 @@ const translations = {
     contactInfo: '連絡先情報',
     phoneNumber: '電話',
     whatsapp: 'WhatsApp',
+    whatsappChat: 'WhatsAppチャット',
     emailAddress: 'メール',
     sendUsMessage: 'メッセージを送る',
     yourName: 'お名前',
+    name: '名前',
     yourEmail: 'メールアドレス',
     subject: '件名',
     message: 'メッセージ',
     sendMessage: 'メッセージを送る',
     findUs: '場所',
+    howCanHelp: 'どのようにお手伝いできますか？',
+    yourNamePlaceholder: 'あなたの名前',
+    emailPlaceholder2: 'you@example.com',
   },
   
   de: {
@@ -328,14 +362,26 @@ const translations = {
     fullName: 'Vollständiger Name',
     email: 'E-Mail',
     phone: 'Telefon',
+    phoneWhatsapp: 'Telefon/WhatsApp',
     serviceType: 'Servicetyp',
     selectService: 'Service auswählen',
     startDate: 'Startdatum',
     endDate: 'Enddatum',
+    pickupDate: 'Abholdatum',
+    returnDate: 'Rückgabedatum',
     numberOfPeople: 'Anzahl der Personen',
     specialRequests: 'Besondere Wünsche',
+    notes: 'Notizen',
     submitBooking: 'Buchung absenden',
+    requestBooking: 'Buchung anfordern',
     estimatedPrice: 'Geschätzter Preis',
+    pricingPlans: 'Preispläne',
+    confirmAvailability: 'Wir bestätigen Verfügbarkeit und Endpreis per E-Mail/WhatsApp.',
+    anythingKnow: 'Sollten wir etwas wissen?',
+    namePlaceholder: 'Max Mustermann',
+    emailPlaceholder: 'max@example.com',
+    phonePlaceholder: '+49 151 1234 5678',
+    bestValuePlan: 'Bester Wert',
     
     // Contact Page
     contactHeroTitle: 'Kontaktieren Sie uns',
@@ -343,128 +389,19 @@ const translations = {
     contactInfo: 'Kontaktinformationen',
     phoneNumber: 'Telefon',
     whatsapp: 'WhatsApp',
+    whatsappChat: 'WhatsApp Chat',
     emailAddress: 'E-Mail',
     sendUsMessage: 'Senden Sie uns eine Nachricht',
     yourName: 'Ihr Name',
+    name: 'Name',
     yourEmail: 'Ihre E-Mail',
     subject: 'Betreff',
     message: 'Nachricht',
     sendMessage: 'Nachricht senden',
     findUs: 'Finden Sie uns',
-  },
-  
-  si: {
-    // Navigation
-    home: 'මුල් පිටුව',
-    vehicles: 'වාහන',
-    tours: 'චාරිකා',
-    gallery: 'ගැලරිය',
-    pricing: 'මිල ගණන්',
-    testimonials: 'සාක්ෂි',
-    book: 'වෙන්කරවා ගන්න',
-    contact: 'අප හා සම්බන්ධ වන්න',
-    
-    // Home Page
-    heroTitle: 'ශ්‍රී ලංකාව සොයා ගන්න',
-    heroSubtitle: 'ප්‍රිමියම් චාරිකා, සුඛෝපභෝගී වාහන සහ ප්‍රවීණ දේශීය මාර්ගෝපදේශකයන් සමඟ ශ්‍රී ලංකාවේ අලංකාරය අත්විඳින්න.',
-    exploreTours: 'චාරිකා ගවේෂණය කරන්න',
-    bookNow: 'දැන් වෙන්කරවා ගන්න',
-    exploreToursTitle: 'චාරිකා ගවේෂණය කරන්න',
-    exploreToursDesc: 'ශ්‍රී ලංකාව පුරා සකස් කළ චාරිකා පැකේජ සහ අභිරුචි මාර්ග සොයා ගන්න',
-    ourVehicles: 'අපගේ වාහන',
-    ourVehiclesDesc: 'ඔබේ සුවපහසුව සහ ආරක්ෂාව සඳහා සුඛෝපභෝගී වාහන',
-    galleryTitle: 'ගැලරිය',
-    galleryDesc: 'අපගේ චාරිකා සහ අලංකාර ස්ථාන වල අපූරු ඡායාරූප බලන්න',
-    whyChooseUs: 'Ceylon Drive Hub තෝරා ගන්නේ ඇයි',
-    premiumExperience: 'ප්‍රිමියම් අත්දැකීම',
-    premiumExperienceDesc: 'අමතක නොවන ගමන් සඳහා සුඛෝපභෝගී වාහන සහ වෘත්තීය සේවාව',
-    localExpertise: 'දේශීය විශේෂඥතාව',
-    localExpertiseDesc: 'ශ්‍රී ලංකාවේ සෑම සැඟවුණු මැණික් ගලක්ම දන්නා ප්‍රවීණ මාර්ගෝපදේශකයන්',
-    bestValue: 'හොඳම වටිනාකම',
-    bestValueDesc: 'විනිවිද පෙනෙන ගාස්තු සහ සැඟවුණු ගාස්තු නොමැතිව තරඟකාරී මිල ගණන්',
-    readyToStart: 'ඔබේ වික්‍රමය ආරම්භ කිරීමට සූදානම්ද?',
-    readyToStartDesc: 'අද ඔබේ ශ්‍රී ලාංකික ගමන වෙන්කරවා ගෙන ජීවිත කාලය පුරාම මතක සාදා ගන්න.',
-    contactUs: 'අප හා සම්බන්ධ වන්න',
-    
-    // Vehicles Page
-    vehiclesHeroTitle: 'අපගේ ප්‍රිමියම් ඇණිය',
-    vehiclesHeroSubtitle: 'ඔබේ ගමන සඳහා අපගේ සුඛෝපභෝගී වාහන වලින් තෝරන්න',
-    luxuryVehicles: 'සුඛෝපභෝගී වාහන',
-    specifications: 'පිරිවිතර',
-    passengers: 'මගීන්',
-    luggage: 'ගමන් මලු',
-    transmission: 'සම්ප්‍රේෂණය',
-    
-    // Tours Page
-    toursHeroTitle: 'ශ්‍රී ලංකාව ගවේෂණය කරන්න',
-    toursHeroSubtitle: 'සකස් කළ චාරිකා පැකේජ සහ අභිරුචි මාර්ග',
-    ourServices: 'අපගේ සේවා',
-    popularDestinations: 'ජනප්‍රිය ගමනාන්ත',
-    
-    // Gallery Page
-    galleryHeroTitle: 'ඡායාරූප ගැලරිය',
-    galleryHeroSubtitle: 'ශ්‍රී ලංකාව පුරා අපගේ චාරිකා වලින් අපූරු දසුන්',
-    
-    // Pricing Page
-    pricingHeroTitle: 'විනිවිද පෙනෙන මිල ගණන්',
-    pricingHeroSubtitle: 'ඔබේ ගමන සඳහා සුදුසුම පැකේජය තෝරන්න',
-    chooseYourPlan: 'ඔබේ සැලැස්ම තෝරන්න',
-    daily: 'දෛනික',
-    weekend: 'සති අන්තය',
-    weekly: 'සතිපතා',
-    perDay: 'දිනකට',
-    perWeekend: '/සිකු–ඉරිදා',
-    perWeek: '/සතිය',
-    bestValueBadge: 'හොඳම වටිනාකම',
-    getStarted: 'ආරම්භ කරන්න',
-    kmPerDayIncluded: 'දිනකට 200 km එකතු වෙ',
-    additionalKm030: 'අතිරික්ත km: $0.30/km',
-    basicInsurance: 'මූලික බීමාව එකතු වෙ',
-    fuelNotIncluded: 'ඉඳුන එකතු නෝවෙ',
-    roadside247: '24/7 මාර්ග සහාය',
-    flexiblePickup: 'යෙදූම් ගැනීමේ වේලාවෙලා',
-    kmIncluded600: '600 km එකතු වෙ',
-    additionalKm025: 'අතිරික්ත km: $0.25/km',
-    freeDelivery: 'නිලව දෙනීම/ගැනීම',
-    unlimitedKm: 'අසීමිත කිලෝමීටර්',
-    premiumInsurance: 'ප්‍රීමියම් බීමාව එකතු වෙ',
-    prioritySupport: 'ප්‍රාථමිකතා සහාය',
-    
-    // Testimonials Page
-    testimonialsHeroTitle: 'අපගේ ගනුදෙනුකරුවන් පවසන දේ',
-    testimonialsHeroSubtitle: 'අප සමඟ ශ්‍රී ලංකාව අත්විඳ ගත් සංචාරකයන්ගේ සමාලෝචන කියවන්න',
-    customerReviews: 'ගනුදෙනුකරු සමාලෝචන',
-    
-    // Book Page
-    bookHeroTitle: 'ඔබේ ගමන වෙන්කරවා ගන්න',
-    bookHeroSubtitle: 'විස්තර පුරවන්න, අපි ඉක්මනින් ඔබ හා සම්බන්ධ වෙමු',
-    bookingForm: 'වෙන්කිරීම් පෝරමය',
-    fullName: 'සම්පූර්ණ නම',
-    email: 'විද්‍යුත් තැපෑල',
-    phone: 'දුරකථනය',
-    serviceType: 'සේවා වර්ගය',
-    selectService: 'සේවාවක් තෝරන්න',
-    startDate: 'ආරම්භක දිනය',
-    endDate: 'අවසාන දිනය',
-    numberOfPeople: 'පුද්ගලයින් ගණන',
-    specialRequests: 'විශේෂ ඉල්ලීම්',
-    submitBooking: 'වෙන්කිරීම ඉදිරිපත් කරන්න',
-    estimatedPrice: 'ඇස්තමේන්තුගත මිල',
-    
-    // Contact Page
-    contactHeroTitle: 'අප හා සම්බන්ධ වන්න',
-    contactHeroSubtitle: 'ඔබේ පරිපූර්ණ ශ්‍රී ලාංකික වික්‍රමය සැලසුම් කිරීමට අපි මේහි සිටිමු',
-    contactInfo: 'සම්බන්ධතා තෝරතුරු',
-    phoneNumber: 'දුරකතනය',
-    whatsapp: 'WhatsApp',
-    emailAddress: 'විද්‍යුත් තැපැල',
-    sendUsMessage: 'අපට පණිවිඩයක් යවන්න',
-    yourName: 'ඔබේ නම',
-    yourEmail: 'ඔබේ විද්‍යුත් තැපැල',
-    subject: 'විෂයය',
-    message: 'පණිවිඩය',
-    sendMessage: 'පණිවිඩය යවන්න',
-    findUs: 'අපව සෝයා ගන්න',
+    howCanHelp: 'Wie können wir helfen?',
+    yourNamePlaceholder: 'Ihr Name',
+    emailPlaceholder2: 'sie@example.com',
   },
 };
 
@@ -475,7 +412,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem('language') as Language;
-    if (saved && ['en', 'ja', 'de', 'si'].includes(saved)) {
+    if (saved && ['en', 'ja', 'de'].includes(saved)) {
       setLanguageState(saved);
     }
   }, []);

@@ -12,7 +12,6 @@ export default function LanguageSwitcher() {
     { code: 'en', name: 'English', flag: '🇬🇧' },
     { code: 'ja', name: '日本語', flag: '🇯🇵' },
     { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
-    { code: 'si', name: 'සිංහල', flag: '🇱🇰' },
   ];
 
   const currentLang = languages.find(l => l.code === language) || languages[0];
@@ -53,7 +52,7 @@ export default function LanguageSwitcher() {
             <button
               key={lang.code}
               onClick={() => {
-                setLanguage(lang.code as 'en' | 'ja' | 'de' | 'si');
+                setLanguage(lang.code as 'en' | 'ja' | 'de');
                 setIsOpen(false);
               }}
               className={`w-full flex items-center gap-3 px-4 py-2.5 text-[14px] text-left transition-all ${

@@ -68,7 +68,7 @@ export default function ContactPage() {
             >
               <div className="text-[40px] mb-3 transition-transform group-hover:scale-110 duration-300">💬</div>
               <p className="text-[15px] font-normal text-gray-900 dark:text-white">
-                WhatsApp Chat
+                {t('whatsappChat')}
               </p>
             </a>
             <a
@@ -87,39 +87,39 @@ export default function ContactPage() {
           <form className="card space-y-5 scroll-animate opacity-0 translate-y-8 transition-all duration-700" style={{ transitionDelay: '300ms' }}>
             <div>
               <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                Name
+                {t('name')}
               </label>
               <input
                 type="text"
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all"
-                placeholder="Your name"
+                placeholder={t('yourNamePlaceholder')}
                 required
               />
             </div>
             <div>
               <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                Email
+                {t('email')}
               </label>
               <input
                 type="email"
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all"
-                placeholder="you@example.com"
+                placeholder={t('emailPlaceholder2')}
                 required
               />
             </div>
             <div>
               <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                Message
+                {t('message')}
               </label>
               <textarea
                 rows={4}
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all resize-none"
-                placeholder="How can we help?"
+                placeholder={t('howCanHelp')}
                 required
               />
             </div>
             <button type="submit" className="btn-primary w-full justify-center text-[15px] py-3.5">
-              Send Message
+              {t('sendMessage')}
             </button>
           </form>
         </div>

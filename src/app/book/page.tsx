@@ -53,40 +53,40 @@ export default function BookPage() {
             <div className="grid md:grid-cols-2 gap-5">
               <div>
                 <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                  Full Name
+                  {t('fullName')}
                 </label>
                 <input
                   type="text"
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all"
-                  placeholder="Jane Doe"
+                  placeholder={t('namePlaceholder')}
                   required
                 />
               </div>
               <div>
                 <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                  Email
+                  {t('email')}
                 </label>
                 <input
                   type="email"
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all"
-                  placeholder="jane@example.com"
+                  placeholder={t('emailPlaceholder')}
                   required
                 />
               </div>
               <div>
                 <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                  Phone/WhatsApp
+                  {t('phoneWhatsapp')}
                 </label>
                 <input
                   type="tel"
                   className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all"
-                  placeholder="+1 555 123 4567"
+                  placeholder={t('phonePlaceholder')}
                   required
                 />
               </div>
               <div>
                 <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                  Pickup Date
+                  {t('pickupDate')}
                 </label>
                 <input
                   type="date"
@@ -96,7 +96,7 @@ export default function BookPage() {
               </div>
               <div>
                 <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                  Return Date
+                  {t('returnDate')}
                 </label>
                 <input
                   type="date"
@@ -106,7 +106,7 @@ export default function BookPage() {
               </div>
               <div>
                 <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                  Service Type
+                  {t('serviceType')}
                 </label>
                 <select className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all">
                   {services.map((service) => (
@@ -119,26 +119,26 @@ export default function BookPage() {
             </div>
             <div>
               <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
-                Notes
+                {t('notes')}
               </label>
               <textarea
                 rows={4}
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all resize-none"
-                placeholder="Anything we should know?"
+                placeholder={t('anythingKnow')}
               />
             </div>
             <button type="submit" className="btn-primary w-full justify-center text-[15px] py-3.5">
-              Request Booking
+              {t('requestBooking')}
             </button>
             <p className="text-[13px] text-gray-600 dark:text-gray-400 text-center">
-              We'll confirm availability and final price by email/WhatsApp.
+              {t('confirmAvailability')}
             </p>
           </form>
         </div>
       </Section>
 
       {/* Pricing Info */}
-      <Section title="Pricing Plans" className="bg-gray-50/50 dark:bg-[#0a0a0a]">
+      <Section title={t('pricingPlans')} className="bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="grid md:grid-cols-3 gap-6 max-w-[980px] mx-auto">
           {[
             { title: 'Daily', price: '$75', unit: '/day', features: ['200 km/day included', 'Additional km: $0.30/km', 'Basic insurance included'] },
