@@ -20,6 +20,8 @@ export default function NavBar() {
     { href: '/vehicles', label: 'Vehicles' },
     { href: '/tours', label: 'Tours' },
     { href: '/gallery', label: 'Gallery' },
+    { href: '/pricing', label: 'Pricing' },
+    { href: '/testimonials', label: 'Testimonials' },
     { href: '/book', label: 'Book' },
     { href: '/contact', label: 'Contact' },
   ];
