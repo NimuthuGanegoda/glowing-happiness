@@ -126,7 +126,7 @@ export default function ContactPage() {
       </Section>
 
       {/* Map */}
-      <Section title="Service Area" className="bg-gray-50/50 dark:bg-[#0a0a0a]">
+      <Section title={t('serviceArea')} className="bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="max-w-[800px] mx-auto scroll-animate opacity-0 scale-95 transition-all duration-700">
           <div className="aspect-video rounded-3xl overflow-hidden border border-gray-200/50 dark:border-white/10">
             <iframe

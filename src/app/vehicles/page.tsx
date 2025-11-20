@@ -126,12 +126,12 @@ export default function VehiclesPage() {
           </p>
           <div className="grid md:grid-cols-2 gap-3">
             {[
-              'Powertrain: 1.4 TFSI turbo petrol with 7‑speed S tronic (FWD)',
-              'Lighting: LED daytime running lights; LED headlights (trim dependent)',
-              'Cabin tech: Audi Virtual Cockpit, MMI 7" display, Bluetooth',
-              'Safety: 6 airbags, ABS, ESC, ISOFIX child‑seat mounts',
-              'Assists: rear parking sensors; cruise control',
-              'Practicality: approx. 405 L boot (rear seats up)',
+              t('powertrainSpec'),
+              t('lightingSpec'),
+              t('cabinTechSpec'),
+              t('safetySpec'),
+              t('assistsSpec'),
+              t('practicalitySpec'),
             ].map((feature, idx) => (
               <div 
                 key={idx} 

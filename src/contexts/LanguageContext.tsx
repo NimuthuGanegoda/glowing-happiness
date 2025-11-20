@@ -181,6 +181,27 @@ const translations = {
     // Vehicle Specifications
     featuresSpecs: 'Features & Specifications',
     comfortConfig: 'Comfort configuration: driver + 4 passengers (4 adults + 1 child in booster/child seat). When a driver or driver‑guide is selected, the usable passenger seats are 4 adults + 1 child; driver occupies the front seat.',
+    powertrainSpec: 'Powertrain: 1.4 TFSI turbo petrol with 7‑speed S tronic (FWD)',
+    lightingSpec: 'Lighting: LED daytime running lights; LED headlights (trim dependent)',
+    cabinTechSpec: 'Cabin tech: Audi Virtual Cockpit, MMI 7" display, Bluetooth',
+    safetySpec: 'Safety: 6 airbags, ABS, ESC, ISOFIX child‑seat mounts',
+    assistsSpec: 'Assists: rear parking sensors; cruise control',
+    practicalitySpec: 'Practicality: approx. 405 L boot (rear seats up)',
+    
+    // Pricing Page Additional
+    whatsIncluded: "What's Included",
+    validLicense: "Valid driver's license required",
+    securityDeposit: 'Security deposit refundable',
+    comprehensiveInsurance: 'Comprehensive insurance coverage',
+    gpsIncluded: 'GPS navigation included',
+    childSeats: 'Child seats available on request',
+    airportPickup: 'Airport pickup/drop-off available',
+    paymentOptions: 'Multiple payment options accepted',
+    cancellation: 'Cancel up to 48 hours for full refund',
+    readyToBook: 'Ready to Book?',
+    getStartedAdventure: 'Get started with your Sri Lankan adventure today.',
+    pricingDisclaimer: 'Security deposit and ID required. Fuel and tolls not included. Prices are placeholders — update to your rates.',
+    serviceArea: 'Service Area',
   },
   
   ja: {
@@ -353,6 +374,27 @@ const translations = {
     // Vehicle Specifications
     featuresSpecs: '機能と仕様',
     comfortConfig: '快適な構成：運転手 + 4名の乗客（大人4名 + ブースター/チャイルドシートの子供1名）。ドライバーまたはドライバーガイドを選択した場合、利用可能な乗客席は大人4名 + 子供1名です。運転手は前席に着席します。',
+    powertrainSpec: 'パワートレイン：1.4 TFSIターボペトロル・7速S tronic（FWD）',
+    lightingSpec: 'ライト：LEDデイタイムランニングライト、LEDヘッドライト（トリムによる）',
+    cabinTechSpec: 'キャビン技術：Audi Virtual Cockpit、MMI 7"ディスプレイ、Bluetooth',
+    safetySpec: '安全性：6エアバッグ、ABS、ESC、ISOFIXチャイルドシートマウント',
+    assistsSpec: 'アシスト：リアパーキングセンサー、クルーズコントロール',
+    practicalitySpec: '実用性：約405 Lトランク（リアシートアップ時）',
+    
+    // Pricing Page Additional
+    whatsIncluded: '含まれるもの',
+    validLicense: '有効な運転免許証が必要',
+    securityDeposit: '保証金は返金可能',
+    comprehensiveInsurance: '包括的な保険適用',
+    gpsIncluded: 'GPSナビゲーション付き',
+    childSeats: 'チャイルドシートリクエスト可能',
+    airportPickup: '空港送迎利用可能',
+    paymentOptions: '複数の支払いオプション利用可能',
+    cancellation: '48時間前までのキャンセルで全額返金',
+    readyToBook: '予約の準備はできましたか？',
+    getStartedAdventure: '今日からスリランカの冒険を始めましょう。',
+    pricingDisclaimer: '保証金とIDが必要です。燃料と通行料は含まれていません。価格はプレースホルダーです — 料金を更新してください。',
+    serviceArea: 'サービスエリア',
   },
   
   de: {
@@ -525,6 +567,27 @@ const translations = {
     // Vehicle Specifications
     featuresSpecs: 'Funktionen & Spezifikationen',
     comfortConfig: 'Komfortkonfiguration: Fahrer + 4 Passagiere (4 Erwachsene + 1 Kind in Kindersitz). Wenn ein Fahrer oder Fahrer-Reiseführer ausgewählt wird, sind die nutzbaren Passagiersitze 4 Erwachsene + 1 Kind; Fahrer besetzt den Vordersitz.',
+    powertrainSpec: 'Antrieb: 1,4 TFSI Turbobenziner mit 7-Gang S tronic (FWD)',
+    lightingSpec: 'Beleuchtung: LED-Tagfahrlicht; LED-Scheinwerfer (trim-abhängig)',
+    cabinTechSpec: 'Kabinentechnik: Audi Virtual Cockpit, MMI 7" Display, Bluetooth',
+    safetySpec: 'Sicherheit: 6 Airbags, ABS, ESC, ISOFIX-Kindersitzbefestigungen',
+    assistsSpec: 'Assistenzsysteme: hintere Parksensoren; Tempomat',
+    practicalitySpec: 'Praktikabilität: ca. 405 L Kofferraum (Rücksitze oben)',
+    
+    // Pricing Page Additional
+    whatsIncluded: 'Was ist inbegriffen',
+    validLicense: 'Gültiger Führerschein erforderlich',
+    securityDeposit: 'Kaution wird zurückerstattet',
+    comprehensiveInsurance: 'Umfassender Versicherungsschutz',
+    gpsIncluded: 'GPS-Navigation inklusive',
+    childSeats: 'Kindersitze auf Anfrage erhältlich',
+    airportPickup: 'Flughafen-Abholung/-Absetzung verfügbar',
+    paymentOptions: 'Mehrere Zahlungsoptionen akzeptiert',
+    cancellation: 'Stornierung bis 48 Stunden für volle Rückerstattung',
+    readyToBook: 'Bereit zu buchen?',
+    getStartedAdventure: 'Beginnen Sie noch heute mit Ihrem sri-lankischen Abenteuer.',
+    pricingDisclaimer: 'Kaution und Ausweis erforderlich. Kraftstoff und Mautgebühren nicht inbegriffen. Preise sind Platzhalter — aktualisieren Sie Ihre Tarife.',
+    serviceArea: 'Servicegebiet',
   },
 };
 

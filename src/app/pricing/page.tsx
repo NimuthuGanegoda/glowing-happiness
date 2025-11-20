@@ -136,18 +136,18 @@ export default function PricingPage() {
       <section className="py-20">
         <div className="max-w-[800px] mx-auto px-5">
           <h2 className="text-[32px] font-semibold mb-8 text-gray-900 dark:text-white text-center">
-            What's Included
+            {t('whatsIncluded')}
           </h2>
           <div className="grid md:grid-cols-2 gap-4 scroll-animate opacity-0 translate-y-8 transition-all duration-700">
             {[
-              'Valid driver\'s license required',
-              'Security deposit refundable',
-              'Comprehensive insurance coverage',
-              'GPS navigation included',
-              'Child seats available on request',
-              'Airport pickup/drop-off available',
-              'Multiple payment options accepted',
-              'Cancel up to 48 hours for full refund'
+              t('validLicense'),
+              t('securityDeposit'),
+              t('comprehensiveInsurance'),
+              t('gpsIncluded'),
+              t('childSeats'),
+              t('airportPickup'),
+              t('paymentOptions'),
+              t('cancellation'),
             ].map((item, idx) => (
               <div key={idx} className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-[#1d1d1f] rounded-xl">
                 <svg className="w-5 h-5 text-[#0071e3] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -164,13 +164,13 @@ export default function PricingPage() {
       <section className="py-20 bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="max-w-[640px] mx-auto text-center px-5 scroll-animate opacity-0 translate-y-8 transition-all duration-700">
           <h2 className="text-[32px] font-semibold mb-4 text-gray-900 dark:text-white">
-            Ready to Book?
+            {t('readyToBook')}
           </h2>
           <p className="text-[17px] text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-            Get started with your Sri Lankan adventure today.
+            {t('getStartedAdventure')}
           </p>
           <a href="/book" className="btn-primary">
-            Book Now
+            {t('bookNow')}
           </a>
         </div>
       </section>

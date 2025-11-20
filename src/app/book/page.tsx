@@ -152,9 +152,9 @@ export default function BookPage() {
       <Section title={t('pricingPlans')} className="bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="grid md:grid-cols-3 gap-6 max-w-[980px] mx-auto">
           {[
-            { title: 'Daily', price: '$75', unit: '/day', features: ['200 km/day included', 'Additional km: $0.30/km', 'Basic insurance included'] },
-            { title: 'Weekend', price: '$200', unit: '/Fri–Sun', features: ['600 km included', 'Flexible pickup times', 'Basic insurance included'] },
-            { title: 'Weekly', price: '$450', unit: '/week', features: ['Unlimited km', 'Best value', 'Basic insurance included'], featured: true },
+            { titleKey: 'daily', price: '$75', unitKey: 'perDay', featureKeys: ['kmPerDayIncluded', 'additionalKm030', 'basicInsurance'] },
+            { titleKey: 'weekend', price: '$200', unitKey: 'perWeekend', featureKeys: ['kmIncluded600', 'flexiblePickup', 'basicInsurance'] },
+            { titleKey: 'weekly', price: '$450', unitKey: 'perWeek', featureKeys: ['unlimitedKm', 'bestValuePlan', 'basicInsurance'], featured: true },
           ].map((plan, idx) => (
             <div
               key={idx}
@@ -163,18 +163,18 @@ export default function BookPage() {
               }`}
               style={{ transitionDelay: `${idx * 150}ms` }}
             >
-              <h3 className="text-[28px] font-semibold mb-5 text-gray-900 dark:text-white tracking-tight">{plan.title}</h3>
+              <h3 className="text-[28px] font-semibold mb-5 text-gray-900 dark:text-white tracking-tight">{t(plan.titleKey)}</h3>
               <div className="mb-8">
                 <span className="text-[56px] font-semibold text-gray-900 dark:text-white tracking-tighter">{plan.price}</span>
-                <span className="text-[17px] text-gray-600 dark:text-gray-400 ml-1">{plan.unit}</span>
+                <span className="text-[17px] text-gray-600 dark:text-gray-400 ml-1">{t(plan.unitKey)}</span>
               </div>
               <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, i) => (
+                {plan.featureKeys.map((featureKey, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-[15px] text-gray-700 dark:text-gray-300">
                     <svg className="w-4 h-4 text-[#0071e3] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    {feature}
+                    {t(featureKey)}
                   </li>
                 ))}
               </ul>
@@ -182,7 +182,7 @@ export default function BookPage() {
           ))}
         </div>
         <p className="text-[14px] text-gray-600 dark:text-gray-400 text-center mt-10 max-w-2xl mx-auto leading-relaxed">
-          Security deposit and ID required. Fuel and tolls not included. Prices are placeholders — update to your rates.
+          {t('pricingDisclaimer')}
         </p>
       </Section>
     </main>
