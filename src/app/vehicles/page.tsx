@@ -8,6 +8,32 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function VehiclesPage() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const { t } = useLanguage();
+  
+  // Translate vehicle features
+  const translateFeature = (feature: string): string => {
+    const featureMap: { [key: string]: string } = {
+      'Virtual Cockpit': t('virtualCockpit'),
+      'LED Headlights': t('ledHeadlights'),
+      'Parking Sensors': t('parkingSensors'),
+      'Apple CarPlay / Android Auto': t('carPlay'),
+      '405 L Boot': t('bootSpace'),
+      'Multiple Classes': t('multipleClasses'),
+      'Flexible Pricing': t('flexiblePricing'),
+      'Modern Safety Tech': t('modernSafety'),
+    };
+    return featureMap[feature] || feature;
+  };
+  
+  const translateVehicleName = (name: string): string => {
+    if (name === 'More Vehicles Coming Soon') return t('moreVehiclesComing');
+    return name;
+  };
+  
+  const translateSegment = (segment: string): string => {
+    if (segment === 'Compact SUV') return t('compactSuv');
+    if (segment === 'Fleet Expansion') return t('fleetExpansion');
+    return segment;
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -63,10 +89,10 @@ export default function VehiclesPage() {
                 />
               </div>
               <h3 className="text-[28px] font-semibold mb-1.5 text-gray-900 dark:text-white tracking-tight">
-                {vehicle.name}
+                {translateVehicleName(vehicle.name)}
               </h3>
               <p className="text-[14px] font-normal text-gray-600 dark:text-gray-400 uppercase tracking-wider mb-5">
-                {vehicle.segment}
+                {translateSegment(vehicle.segment)}
               </p>
               <div className="space-y-2.5 mb-6">
                 {vehicle.keyFeatures.map((feature, idx) => (
@@ -74,17 +100,17 @@ export default function VehiclesPage() {
                     <svg className="w-4 h-4 text-[#0071e3] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    {feature}
+                    {translateFeature(feature)}
                   </div>
                 ))}
               </div>
               {vehicle.status === 'available' ? (
                 <a href="/book" className="btn-primary w-full justify-center">
-                  Book {vehicle.name.split(' ')[0]}
+                  {t('book')} {vehicle.name.split(' ')[0]}
                 </a>
               ) : (
                 <span className="block text-center text-[14px] text-gray-500 dark:text-gray-400 py-3.5 bg-gray-50 dark:bg-white/5 rounded-full">
-                  Coming Soon
+                  {t('comingSoon')}
                 </span>
               )}
             </div>
@@ -93,12 +119,10 @@ export default function VehiclesPage() {
       </Section>
 
       {/* Features */}
-      <Section title="Features & Specifications" className="bg-gray-50/50 dark:bg-[#0a0a0a]">
+      <Section title={t('featuresSpecs')} className="bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="max-w-[800px] mx-auto">
           <p className="text-[19px] font-normal leading-relaxed text-gray-600 dark:text-gray-400 mb-12 text-center scroll-animate opacity-0 translate-y-8 transition-all duration-700">
-            Comfort configuration: driver + 4 passengers (4 adults + 1 child in booster/child seat). 
-            When a driver or driver‑guide is selected, the usable passenger seats are 4 adults + 1 child; 
-            driver occupies the front seat.
+            {t('comfortConfig')}
           </p>
           <div className="grid md:grid-cols-2 gap-3">
             {[

@@ -140,6 +140,47 @@ const translations = {
     howCanHelp: 'How can we help?',
     yourNamePlaceholder: 'Your name',
     emailPlaceholder2: 'you@example.com',
+    
+    // Vehicle Features
+    virtualCockpit: 'Virtual Cockpit',
+    ledHeadlights: 'LED Headlights',
+    parkingSensors: 'Parking Sensors',
+    carPlay: 'Apple CarPlay / Android Auto',
+    bootSpace: '405 L Boot',
+    multipleClasses: 'Multiple Classes',
+    flexiblePricing: 'Flexible Pricing',
+    modernSafety: 'Modern Safety Tech',
+    compactSuv: 'Compact SUV',
+    fleetExpansion: 'Fleet Expansion',
+    newModelsAdded: 'New models will be added shortly',
+    moreVehiclesComing: 'More Vehicles Coming Soon',
+    available: 'Available',
+    comingSoon: 'Coming Soon',
+    
+    // Service Descriptions
+    selfDriveTitle: 'Self-Drive',
+    selfDriveDesc: 'Require local licence + IDP if visitor',
+    driverTitle: 'Driver',
+    driverDesc: 'Driver provided — seating reduced to 4 adults + 1 child',
+    driverGuideTitle: 'Driver-Guide',
+    driverGuideDesc: 'Driver can act as guide — add guide fee on request',
+    airportTransferTitle: 'Airport Transfers',
+    airportTransferDesc: 'Pickups & Drops — add flight details in booking',
+    
+    // Tour Highlights
+    whyChooseTours: 'Why Choose Our Tours',
+    customItineraries: 'Custom Itineraries',
+    customItinerariesDesc: 'Tailored routes based on your interests and schedule',
+    expertGuides: 'Expert Guides',
+    expertGuidesDesc: 'Knowledgeable local guides who speak multiple languages',
+    culturalImmersion: 'Cultural Immersion',
+    culturalImmersionDesc: 'Authentic experiences at temples, markets, and villages',
+    photoOpportunities: 'Photo Opportunities',
+    photoOpportunitiesDesc: 'Stops at the most scenic and Instagram-worthy locations',
+    
+    // Vehicle Specifications
+    featuresSpecs: 'Features & Specifications',
+    comfortConfig: 'Comfort configuration: driver + 4 passengers (4 adults + 1 child in booster/child seat). When a driver or driver‑guide is selected, the usable passenger seats are 4 adults + 1 child; driver occupies the front seat.',
   },
   
   ja: {
@@ -269,8 +310,49 @@ const translations = {
     sendMessage: 'メッセージを送る',
     findUs: '場所',
     howCanHelp: 'どのようにお手伝いできますか？',
-    yourNamePlaceholder: 'あなたの名前',
+    yourNamePlaceholder: 'お名前',
     emailPlaceholder2: 'you@example.com',
+    
+    // Vehicle Features
+    virtualCockpit: 'バーチャルコックピット',
+    ledHeadlights: 'LEDヘッドライト',
+    parkingSensors: 'パーキングセンサー',
+    carPlay: 'Apple CarPlay / Android Auto',
+    bootSpace: '405 Lトランク',
+    multipleClasses: '複数クラス',
+    flexiblePricing: '柔軟な料金',
+    modernSafety: '最新の安全技術',
+    compactSuv: 'コンパクトSUV',
+    fleetExpansion: 'フリート拡張',
+    newModelsAdded: '新しいモデルを間もなく追加',
+    moreVehiclesComing: 'より多くの車両が近日公開',
+    available: '利用可能',
+    comingSoon: '近日公開',
+    
+    // Service Descriptions
+    selfDriveTitle: 'セルフドライブ',
+    selfDriveDesc: '現地の免許証+訪問者の場合はIDP必要',
+    driverTitle: 'ドライバー',
+    driverDesc: 'ドライバー付き — 大人4名+子供1名に座席削減',
+    driverGuideTitle: 'ドライバー兼ガイド',
+    driverGuideDesc: 'ドライバーがガイドとして機能 — リクエストでガイド料金追加',
+    airportTransferTitle: '空港送迎',
+    airportTransferDesc: '送迎サービス — 予約時にフライト詳細を追加',
+    
+    // Tour Highlights
+    whyChooseTours: '私たちのツアーを選ぶ理由',
+    customItineraries: 'カスタム旅程',
+    customItinerariesDesc: 'ご興味とスケジュールに合わせたルート',
+    expertGuides: '専門ガイド',
+    expertGuidesDesc: '複数の言語を話す知識豊富な地元ガイド',
+    culturalImmersion: '文化体験',
+    culturalImmersionDesc: '寺院、市場、村での本物の体験',
+    photoOpportunities: '写真撮影の機会',
+    photoOpportunitiesDesc: '最も絶景でInstagram映えする場所での停車',
+    
+    // Vehicle Specifications
+    featuresSpecs: '機能と仕様',
+    comfortConfig: '快適な構成：運転手 + 4名の乗客（大人4名 + ブースター/チャイルドシートの子供1名）。ドライバーまたはドライバーガイドを選択した場合、利用可能な乗客席は大人4名 + 子供1名です。運転手は前席に着席します。',
   },
   
   de: {
@@ -402,6 +484,47 @@ const translations = {
     howCanHelp: 'Wie können wir helfen?',
     yourNamePlaceholder: 'Ihr Name',
     emailPlaceholder2: 'sie@example.com',
+    
+    // Vehicle Features
+    virtualCockpit: 'Virtuelles Cockpit',
+    ledHeadlights: 'LED-Scheinwerfer',
+    parkingSensors: 'Parksensoren',
+    carPlay: 'Apple CarPlay / Android Auto',
+    bootSpace: '405 L Kofferraum',
+    multipleClasses: 'Mehrere Klassen',
+    flexiblePricing: 'Flexible Preisgestaltung',
+    modernSafety: 'Moderne Sicherheitstechnik',
+    compactSuv: 'Kompakt-SUV',
+    fleetExpansion: 'Flottenerweiterung',
+    newModelsAdded: 'Neue Modelle werden in Kürze hinzugefügt',
+    moreVehiclesComing: 'Weitere Fahrzeuge in Kürze',
+    available: 'Verfügbar',
+    comingSoon: 'Demnächst',
+    
+    // Service Descriptions
+    selfDriveTitle: 'Selbstfahrer',
+    selfDriveDesc: 'Lokaler Führerschein + IDP erforderlich für Besucher',
+    driverTitle: 'Mit Fahrer',
+    driverDesc: 'Fahrer inklusive — Sitzplätze reduziert auf 4 Erwachsene + 1 Kind',
+    driverGuideTitle: 'Fahrer-Reiseführer',
+    driverGuideDesc: 'Fahrer kann als Reiseführer fungieren — Führergebühr auf Anfrage',
+    airportTransferTitle: 'Flughafentransfers',
+    airportTransferDesc: 'Abholungen & Absetzungen — Flugdetails bei Buchung hinzufügen',
+    
+    // Tour Highlights
+    whyChooseTours: 'Warum unsere Touren wählen',
+    customItineraries: 'Individuelle Routen',
+    customItinerariesDesc: 'Maßgeschneiderte Routen basierend auf Ihren Interessen und Zeitplan',
+    expertGuides: 'Expertenleitfäden',
+    expertGuidesDesc: 'Sachkundige lokale Führer, die mehrere Sprachen sprechen',
+    culturalImmersion: 'Kulturelles Eintauchen',
+    culturalImmersionDesc: 'Authentische Erlebnisse in Tempeln, Märkten und Dörfern',
+    photoOpportunities: 'Fotomöglichkeiten',
+    photoOpportunitiesDesc: 'Stopps an den malerischsten und Instagram-würdigen Orten',
+    
+    // Vehicle Specifications
+    featuresSpecs: 'Funktionen & Spezifikationen',
+    comfortConfig: 'Komfortkonfiguration: Fahrer + 4 Passagiere (4 Erwachsene + 1 Kind in Kindersitz). Wenn ein Fahrer oder Fahrer-Reiseführer ausgewählt wird, sind die nutzbaren Passagiersitze 4 Erwachsene + 1 Kind; Fahrer besetzt den Vordersitz.',
   },
 };
 

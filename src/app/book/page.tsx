@@ -8,6 +8,17 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function BookPage() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const { t } = useLanguage();
+  
+  // Translate service titles
+  const translateServiceTitle = (id: string): string => {
+    const titleMap: { [key: string]: string } = {
+      'self-drive': t('selfDriveTitle'),
+      'driver': t('driverTitle'),
+      'driver-guide': t('driverGuideTitle'),
+      'airport-transfer': t('airportTransferTitle'),
+    };
+    return titleMap[id] || id;
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -111,7 +122,7 @@ export default function BookPage() {
                 <select className="w-full px-4 py-2.5 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#1d1d1f] text-gray-900 dark:text-white text-[15px] focus:ring-2 focus:ring-[#0071e3] focus:border-transparent outline-none transition-all">
                   {services.map((service) => (
                     <option key={service.id} value={service.id}>
-                      {service.title}
+                      {translateServiceTitle(service.id)}
                     </option>
                   ))}
                 </select>

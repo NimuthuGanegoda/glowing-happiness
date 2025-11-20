@@ -8,6 +8,27 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export default function ToursPage() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const { t } = useLanguage();
+  
+  // Translate service titles and descriptions
+  const translateServiceTitle = (id: string): string => {
+    const titleMap: { [key: string]: string } = {
+      'self-drive': t('selfDriveTitle'),
+      'driver': t('driverTitle'),
+      'driver-guide': t('driverGuideTitle'),
+      'airport-transfer': t('airportTransferTitle'),
+    };
+    return titleMap[id] || id;
+  };
+  
+  const translateServiceDesc = (id: string): string => {
+    const descMap: { [key: string]: string } = {
+      'self-drive': t('selfDriveDesc'),
+      'driver': t('driverDesc'),
+      'driver-guide': t('driverGuideDesc'),
+      'airport-transfer': t('airportTransferDesc'),
+    };
+    return descMap[id] || id;
+  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -57,13 +78,13 @@ export default function ToursPage() {
             >
               <div className="text-[56px] mb-5 transition-transform group-hover:scale-110 duration-300">{service.icon}</div>
               <h3 className="text-[21px] font-semibold mb-2.5 text-gray-900 dark:text-white tracking-tight">
-                {service.title}
+                {translateServiceTitle(service.id)}
               </h3>
               <p className="text-[15px] font-normal text-gray-600 dark:text-gray-400 mb-5 leading-relaxed">
-                {service.description}
+                {translateServiceDesc(service.id)}
               </p>
               <a href="/book" className="btn-secondary w-full justify-center text-[14px]">
-                Choose {service.title}
+                {t('book')} {translateServiceTitle(service.id)}
               </a>
             </div>
           ))}
@@ -71,13 +92,13 @@ export default function ToursPage() {
       </Section>
 
       {/* Tour Highlights */}
-      <Section title="Why Choose Our Tours" className="bg-gray-50/50 dark:bg-[#0a0a0a]">
+      <Section title={t('whyChooseTours')} className="bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="max-w-[800px] mx-auto grid md:grid-cols-2 gap-8">
           {[
-            { icon: '🗺️', title: 'Custom Itineraries', desc: 'Tailored routes based on your interests and schedule' },
-            { icon: '👨‍✈️', title: 'Expert Guides', desc: 'Knowledgeable local guides who speak multiple languages' },
-            { icon: '🏛️', title: 'Cultural Immersion', desc: 'Authentic experiences at temples, markets, and villages' },
-            { icon: '📸', title: 'Photo Opportunities', desc: 'Stops at the most scenic and Instagram-worthy locations' },
+            { icon: '🗺️', titleKey: 'customItineraries', descKey: 'customItinerariesDesc' },
+            { icon: '👨‍✈️', titleKey: 'expertGuides', descKey: 'expertGuidesDesc' },
+            { icon: '🏛️', titleKey: 'culturalImmersion', descKey: 'culturalImmersionDesc' },
+            { icon: '📸', titleKey: 'photoOpportunities', descKey: 'photoOpportunitiesDesc' },
           ].map((item, idx) => (
             <div 
               key={idx}
@@ -86,8 +107,8 @@ export default function ToursPage() {
             >
               <div className="text-[48px] flex-shrink-0">{item.icon}</div>
               <div>
-                <h3 className="text-[21px] font-semibold mb-2 text-gray-900 dark:text-white">{item.title}</h3>
-                <p className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
+                <h3 className="text-[21px] font-semibold mb-2 text-gray-900 dark:text-white">{t(item.titleKey)}</h3>
+                <p className="text-[15px] text-gray-600 dark:text-gray-400 leading-relaxed">{t(item.descKey)}</p>
               </div>
             </div>
           ))}
@@ -95,7 +116,7 @@ export default function ToursPage() {
       </Section>
 
       {/* Popular Destinations */}
-      <Section title="Popular Destinations">
+      <Section title={t('popularDestinations')}>
         <div className="grid md:grid-cols-3 gap-6 max-w-[980px] mx-auto">
           {[
             { name: 'Sigiriya Rock Fortress', image: 'https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=600' },
