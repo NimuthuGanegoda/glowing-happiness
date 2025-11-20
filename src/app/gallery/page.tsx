@@ -12,6 +12,7 @@ export default function GalleryPage() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
+            observerRef.current?.unobserve(entry.target);
           }
         });
       },
@@ -19,7 +20,11 @@ export default function GalleryPage() {
     );
 
     const elements = document.querySelectorAll('.scroll-animate');
-    elements.forEach((el) => observerRef.current?.observe(el));
+    elements.forEach((el) => {
+      if (!el.classList.contains('animate-in')) {
+        observerRef.current?.observe(el);
+      }
+    });
 
     return () => observerRef.current?.disconnect();
   }, []);

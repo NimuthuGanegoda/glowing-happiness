@@ -11,6 +11,8 @@ export default function HomePage() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in');
+            // Stop observing once animated to prevent re-triggering
+            observerRef.current?.unobserve(entry.target);
           }
         });
       },
@@ -18,7 +20,12 @@ export default function HomePage() {
     );
 
     const elements = document.querySelectorAll('.scroll-animate');
-    elements.forEach((el) => observerRef.current?.observe(el));
+    elements.forEach((el) => {
+      // Only observe if not already animated
+      if (!el.classList.contains('animate-in')) {
+        observerRef.current?.observe(el);
+      }
+    });
 
     return () => observerRef.current?.disconnect();
   }, []);
