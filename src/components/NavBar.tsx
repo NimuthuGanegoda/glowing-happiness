@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,14 +19,14 @@ export default function NavBar() {
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/vehicles', label: 'Vehicles' },
-    { href: '/tours', label: 'Tours' },
-    { href: '/gallery', label: 'Gallery' },
-    { href: '/pricing', label: 'Pricing' },
-    { href: '/testimonials', label: 'Testimonials' },
-    { href: '/book', label: 'Book' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/', label: t('home') },
+    { href: '/vehicles', label: t('vehicles') },
+    { href: '/tours', label: t('tours') },
+    { href: '/gallery', label: t('gallery') },
+    { href: '/pricing', label: t('pricing') },
+    { href: '/testimonials', label: t('testimonials') },
+    { href: '/book', label: t('book') },
+    { href: '/contact', label: t('contact') },
   ];
 
   return (
@@ -44,7 +47,7 @@ export default function NavBar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -55,6 +58,7 @@ export default function NavBar() {
                 {link.label}
               </Link>
             ))}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile menu button */}
@@ -88,6 +92,9 @@ export default function NavBar() {
                 {link.label}
               </Link>
             ))}
+            <div className="px-4 py-2">
+              <LanguageSwitcher />
+            </div>
           </div>
         )}
       </nav>
