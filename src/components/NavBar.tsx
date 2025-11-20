@@ -16,13 +16,12 @@ export default function NavBar() {
   }, []);
 
   const navLinks = [
-    { href: '#vehicles', label: 'Vehicles' },
-    { href: '#features', label: 'Features' },
-    { href: '#pricing', label: 'Pricing' },
-    { href: '#gallery', label: 'Gallery' },
-    { href: '#testimonials', label: 'Testimonials' },
-    { href: '#book', label: 'Book Now' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/', label: 'Home' },
+    { href: '/vehicles', label: 'Vehicles' },
+    { href: '/tours', label: 'Tours' },
+    { href: '/gallery', label: 'Gallery' },
+    { href: '/book', label: 'Book' },
+    { href: '/contact', label: 'Contact' },
   ];
 
   return (
@@ -45,14 +44,14 @@ export default function NavBar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-[12px] font-normal text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -78,14 +77,14 @@ export default function NavBar() {
         {isOpen && (
           <div className="md:hidden py-3 space-y-0.5 glass border-t border-gray-200/50 dark:border-white/10">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="block px-4 py-2.5 text-[14px] font-normal text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/50 dark:hover:bg-white/5 rounded-lg transition-all"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         )}

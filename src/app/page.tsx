@@ -2,9 +2,29 @@
 
 import Section from '@/components/Section';
 import { siteData, vehicles, testimonials, services } from '@/data/siteData';
-import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 
 export default function HomePage() {
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+    );
+
+    const elements = document.querySelectorAll('.scroll-animate');
+    elements.forEach((el) => observerRef.current?.observe(el));
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
@@ -27,21 +47,21 @@ export default function HomePage() {
             ))}
           </div>
           <div className="flex flex-wrap justify-center gap-4 fade-in-delay-3">
-            <a href="#book" className="btn-primary">
+            <a href="/book" className="btn-primary">
               Book Now
             </a>
-            <a href="#vehicles" className="btn-secondary">
+            <a href="/vehicles" className="btn-secondary">
               View Vehicles
             </a>
           </div>
         </div>
       </section>
 
-      {/* Vehicles Section */}
+      {/* Featured Vehicles */}
       <Section title="Our Vehicles" id="vehicles">
         <div className="grid md:grid-cols-2 gap-6 max-w-[980px] mx-auto">
-          {vehicles.map((vehicle, idx) => (
-            <div key={vehicle.id} className={`card fade-in-delay-${idx + 1}`}>
+          {vehicles.slice(0, 2).map((vehicle, idx) => (
+            <div key={vehicle.id} className="card scroll-animate opacity-0 translate-y-8 transition-all duration-700" style={{ transitionDelay: `${idx * 150}ms` }}>
               <div className="aspect-[16/10] relative overflow-hidden rounded-2xl mb-6 bg-gray-100 dark:bg-gray-800">
                 <img
                   src={vehicle.thumbImage}
@@ -66,7 +86,7 @@ export default function HomePage() {
                 ))}
               </div>
               {vehicle.status === 'available' ? (
-                <a href="#book" className="btn-primary w-full justify-center">
+                <a href="/book" className="btn-primary w-full justify-center">
                   Book {vehicle.name.split(' ')[0]}
                 </a>
               ) : (
@@ -77,12 +97,17 @@ export default function HomePage() {
             </div>
           ))}
         </div>
+        <div className="text-center mt-10 scroll-animate opacity-0 translate-y-8 transition-all duration-700" style={{ transitionDelay: '300ms' }}>
+          <a href="/vehicles" className="btn-secondary">
+            View All Vehicles
+          </a>
+        </div>
       </Section>
 
       {/* Features Section */}
       <Section title="Features & Seating Reality" id="features" className="bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="max-w-[800px] mx-auto">
-          <p className="text-[19px] font-normal leading-relaxed text-gray-600 dark:text-gray-400 mb-12 text-center">
+          <p className="text-[19px] font-normal leading-relaxed text-gray-600 dark:text-gray-400 mb-12 text-center scroll-animate opacity-0 translate-y-8 transition-all duration-700">
             Comfort configuration: driver + 4 passengers (4 adults + 1 child in booster/child seat). 
             When a driver or driver‑guide is selected, the usable passenger seats are 4 adults + 1 child; 
             driver occupies the front seat.
@@ -96,7 +121,7 @@ export default function HomePage() {
               'Assists: rear parking sensors; cruise control',
               'Practicality: approx. 405 L boot (rear seats up)',
             ].map((feature, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-5 bg-white dark:bg-[#1d1d1f] rounded-2xl hover:shadow-md transition-shadow">
+              <div key={idx} className="flex items-start gap-3 p-5 bg-white dark:bg-[#1d1d1f] rounded-2xl hover:shadow-md transition-shadow scroll-animate opacity-0 translate-y-8" style={{ transitionDelay: `${idx * 100}ms` }}>
                 <svg className="w-5 h-5 text-[#0071e3] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
@@ -110,8 +135,8 @@ export default function HomePage() {
       {/* Services Section */}
       <Section title="Tours & Services" id="tours">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[980px] mx-auto">
-          {services.map((service) => (
-            <div key={service.id} className="card text-center group">
+          {services.map((service, idx) => (
+            <div key={service.id} className="card text-center group scroll-animate opacity-0 translate-y-8 transition-all duration-700" style={{ transitionDelay: `${idx * 100}ms` }}>
               <div className="text-[56px] mb-5 transition-transform group-hover:scale-110 duration-300">{service.icon}</div>
               <h3 className="text-[21px] font-semibold mb-2.5 text-gray-900 dark:text-white tracking-tight">
                 {service.title}
@@ -119,8 +144,8 @@ export default function HomePage() {
               <p className="text-[15px] font-normal text-gray-600 dark:text-gray-400 mb-5 leading-relaxed">
                 {service.description}
               </p>
-              <a href="#book" className="btn-secondary w-full justify-center text-[14px]">
-                Choose {service.title}
+              <a href="/tours" className="btn-secondary w-full justify-center text-[14px]">
+                Learn More
               </a>
             </div>
           ))}
@@ -137,9 +162,10 @@ export default function HomePage() {
           ].map((plan, idx) => (
             <div
               key={idx}
-              className={`card ${
+              className={`card scroll-animate opacity-0 translate-y-8 transition-all duration-700 ${
                 plan.featured ? 'ring-2 ring-[#0071e3] dark:ring-[#0071e3] scale-105' : ''
               }`}
+              style={{ transitionDelay: `${idx * 150}ms` }}
             >
               <h3 className="text-[28px] font-semibold mb-5 text-gray-900 dark:text-white tracking-tight">{plan.title}</h3>
               <div className="mb-8">
@@ -156,7 +182,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <a href="#book" className={plan.featured ? 'btn-primary w-full justify-center' : 'btn-secondary w-full justify-center'}>
+              <a href="/book" className={plan.featured ? 'btn-primary w-full justify-center' : 'btn-secondary w-full justify-center'}>
                 Choose {plan.title}
               </a>
             </div>
@@ -176,7 +202,7 @@ export default function HomePage() {
             'https://images.unsplash.com/photo-1517940310602-1152b9f2c055?q=80&w=600&auto=format&fit=crop',
             'https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?q=80&w=600&auto=format&fit=crop',
           ].map((src, idx) => (
-            <div key={idx} className="aspect-[4/3] relative overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800">
+            <div key={idx} className="aspect-[4/3] relative overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800 scroll-animate opacity-0 scale-95 transition-all duration-700" style={{ transitionDelay: `${idx * 100}ms` }}>
               <img
                 src={src}
                 alt={`Gallery image ${idx + 1}`}
@@ -191,7 +217,7 @@ export default function HomePage() {
       <Section title="Testimonials" id="testimonials" className="bg-gray-50/50 dark:bg-[#0a0a0a]">
         <div className="grid md:grid-cols-3 gap-6 max-w-[980px] mx-auto">
           {testimonials.map((testimonial, idx) => (
-            <div key={idx} className="card">
+            <div key={idx} className="card scroll-animate opacity-0 translate-y-8 transition-all duration-700" style={{ transitionDelay: `${idx * 150}ms` }}>
               <div className="flex items-start gap-3.5 mb-5">
                 <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#0071e3] to-[#00a0ff] flex items-center justify-center text-white text-[17px] font-semibold flex-shrink-0">
                   {testimonial.name.charAt(0)}
@@ -221,7 +247,7 @@ export default function HomePage() {
       {/* Booking Section */}
       <Section title="Book Your Dates" id="book">
         <div className="max-w-[640px] mx-auto">
-          <form className="card space-y-5">
+          <form className="card space-y-5 scroll-animate opacity-0 translate-y-8 transition-all duration-700">
             <div className="grid md:grid-cols-2 gap-5">
               <div>
                 <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
@@ -311,7 +337,7 @@ export default function HomePage() {
 
       {/* Map Section */}
       <Section title="Service Area — Sri Lanka" id="map" className="bg-gray-50/50 dark:bg-[#0a0a0a]">
-        <div className="max-w-[800px] mx-auto">
+        <div className="max-w-[800px] mx-auto scroll-animate opacity-0 scale-95 transition-all duration-700">
           <div className="aspect-video rounded-3xl overflow-hidden border border-gray-200/50 dark:border-white/10">
             <iframe
               title="Sri Lanka map"
@@ -330,7 +356,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-4 mb-12">
             <a
               href={`tel:${siteData.contact.phone}`}
-              className="card text-center group"
+              className="card text-center group scroll-animate opacity-0 translate-y-8 transition-all duration-700"
             >
               <div className="text-[40px] mb-3 transition-transform group-hover:scale-110 duration-300">📞</div>
               <p className="text-[15px] font-normal text-gray-900 dark:text-white">
@@ -341,7 +367,8 @@ export default function HomePage() {
               href={`https://wa.me/${siteData.contact.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="card text-center group"
+              className="card text-center group scroll-animate opacity-0 translate-y-8 transition-all duration-700"
+              style={{ transitionDelay: '100ms' }}
             >
               <div className="text-[40px] mb-3 transition-transform group-hover:scale-110 duration-300">💬</div>
               <p className="text-[15px] font-normal text-gray-900 dark:text-white">
@@ -350,7 +377,8 @@ export default function HomePage() {
             </a>
             <a
               href={`mailto:${siteData.contact.email}`}
-              className="card text-center group"
+              className="card text-center group scroll-animate opacity-0 translate-y-8 transition-all duration-700"
+              style={{ transitionDelay: '200ms' }}
             >
               <div className="text-[40px] mb-3 transition-transform group-hover:scale-110 duration-300">✉️</div>
               <p className="text-[15px] font-normal text-gray-900 dark:text-white break-all">
@@ -358,7 +386,7 @@ export default function HomePage() {
               </p>
             </a>
           </div>
-          <form className="card space-y-5">
+          <form className="card space-y-5 scroll-animate opacity-0 translate-y-8 transition-all duration-700" style={{ transitionDelay: '300ms' }}>
             <div>
               <label className="block text-[13px] font-normal mb-2 text-gray-700 dark:text-gray-300">
                 Name
