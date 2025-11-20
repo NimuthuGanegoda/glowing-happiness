@@ -431,6 +431,10 @@ const translations = {
     yalaPark: 'ヤーラ国立公園',
     ellaRock: 'エッラ・ロック',
     mirissaBeach: 'ミリッサビーチ',
+    
+    // Footer
+    copyright: '著作権所有。',
+    mediaDisclaimer: 'メディアはプレースホルダーです。製作前にライセンスされたスリランカの映像に置き換えてください。',
   },
   
   de: {
@@ -642,6 +646,10 @@ const translations = {
     yalaPark: 'Yala-Nationalpark',
     ellaRock: 'Ella Rock',
     mirissaBeach: 'Mirissa Beach',
+    
+    // Footer
+    copyright: 'Alle Rechte vorbehalten.',
+    mediaDisclaimer: 'Medien sind Platzhalter. Vor der Produktion durch lizenziertes Sri Lanka-Material ersetzen.',
   },
 };
 
