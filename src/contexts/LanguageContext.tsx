@@ -220,6 +220,10 @@ const translations = {
     yalaPark: 'Yala National Park',
     ellaRock: 'Ella Rock',
     mirissaBeach: 'Mirissa Beach',
+
+    // Footer
+    copyright: 'All rights reserved.',
+    mediaDisclaimer: 'Media are placeholders. Replace with licensed Sri Lanka footage before production.',
   },
   
   ja: {
