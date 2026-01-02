@@ -22,6 +22,7 @@ export default function NavBar() {
     { href: '/', label: t('home') },
     { href: '/vehicles', label: t('vehicles') },
     { href: '/tours', label: t('tours') },
+    { href: '/kings', label: t('kings') },
     { href: '/gallery', label: t('gallery') },
     { href: '/pricing', label: t('pricing') },
     { href: '/testimonials', label: t('testimonials') },
